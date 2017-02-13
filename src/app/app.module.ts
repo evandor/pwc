@@ -5,6 +5,8 @@ import { AddPage } from '../pages/add/add';
 import { ChartsPage } from '../pages/charts/charts';
 import { ProfilePage } from '../pages/profile/profile';
 import { TabsPage } from '../pages/tabs/tabs';
+import { ChartsModule } from 'ng2-charts';
+import { Storage } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,7 @@ import { TabsPage } from '../pages/tabs/tabs';
     TabsPage
   ],
   imports: [
+    ChartsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -25,6 +28,9 @@ import { TabsPage } from '../pages/tabs/tabs';
     ProfilePage,
     TabsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Storage
+  ]
 })
 export class AppModule {}
