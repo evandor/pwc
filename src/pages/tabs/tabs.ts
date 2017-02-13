@@ -10,9 +10,9 @@ import { ChartsPage } from '../charts/charts';
 export class TabsPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
-  tab1Root: any = ProfilePage;
+  tab1Root: any = ChartsPage;
   tab2Root: any = AddPage;
-  tab3Root: any = ChartsPage;
+  tab3Root: any = ProfilePage;
 
   constructor() {
 
