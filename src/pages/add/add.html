@@ -11,7 +11,7 @@
    <form [formGroup]="addWeightFormGroup">
     <ion-item>
       <ion-label>Date</ion-label>
-      <ion-input type="text" formControlName="date"></ion-input>
+      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="date" max="2017-03-31"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Weight</ion-label>

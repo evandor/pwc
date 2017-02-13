@@ -17,7 +17,7 @@ export class AddPage {
     addWeightFormGroup: FormGroup;
     reading:Reading= new Reading();
     readings: Array<Reading> = new Array();
-  
+    //date: Date = new Date();
 
   constructor(
     public navCtrl: NavController,
@@ -34,6 +34,8 @@ export class AddPage {
         storage.set("readings", this.readings);
       }
     });
+
+     this.addWeightFormGroup.controls['date'].setValue("current date here");
 
   }
 

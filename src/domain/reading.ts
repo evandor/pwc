@@ -1,9 +1,9 @@
 export class Reading {
   
     weight: number;
-    date:   number; // dd.mm.yyyy
+    date:   string; 
 
-    constructor (weight?: number, date?:number) {
+    constructor (weight?: number, date?:string) {
         this.weight=weight;
         this.date=date;
     }
