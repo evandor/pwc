@@ -1,0 +1,3 @@
+https://forum.ionicframework.com/t/solved-how-to-get-momentjs-into-a-ionic2-ts-project-without-errors/46862/3
+
+npm install --save moment
