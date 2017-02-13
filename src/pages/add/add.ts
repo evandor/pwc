@@ -17,15 +17,16 @@ export class AddPage {
     addWeightFormGroup: FormGroup;
     reading:Reading= new Reading();
     readings: Array<Reading> = new Array();
-    //date: Date = new Date();
+    myDate: String = new Date().toISOString();
 
   constructor(
     public navCtrl: NavController,
     private formBuilder: FormBuilder,
-    public storage: Storage,) {
+    public storage: Storage) {
 
     this.addWeightFormGroup = this.formBuilder.group({
-      weight: ['', Validators.required],
+      kilogram: ['', Validators.required],
+      gram: ['', Validators.required],
       date: ['', Validators.required]
     });
 
@@ -35,14 +36,15 @@ export class AddPage {
       }
     });
 
-     this.addWeightFormGroup.controls['date'].setValue("current date here");
+     //this.addWeightFormGroup.controls['date'].setValue(new Date());
 
   }
 
   saveWeight(){
 
     this.storage.get("readings").then((readings) => {
-      this.reading.weight = this.addWeightFormGroup.value.weight; 
+      this.reading.weight = Number(this.addWeightFormGroup.value.kilogram+"."+this.addWeightFormGroup.value.gram);
+      console.log(typeof(this.reading.weight));
       this.reading.date = this.addWeightFormGroup.value.date;
       readings.push(this.reading);
       this.storage.set("readings", readings);

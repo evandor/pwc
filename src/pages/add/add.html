@@ -11,17 +11,27 @@
    <form [formGroup]="addWeightFormGroup">
     <ion-item>
       <ion-label>Date</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="date" max="2017-03-31"></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="date" [(ngModel)]="myDate"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Weight</ion-label>
-      <ion-input type="text" formControlName="weight"></ion-input>
+      <ion-select formControlName="kilogram">
+        <ion-option checked="true">50</ion-option>
+        <ion-option>60</ion-option>
+        <ion-option>70</ion-option>
+      </ion-select>
+      <ion-select formControlName="gram">
+        <ion-option>1</ion-option>
+        <ion-option>2</ion-option>
+        <ion-option>3</ion-option>
+        <ion-option>4</ion-option>
+        <ion-option>5</ion-option>
+        <ion-option checked="true">6</ion-option>
+        <ion-option>7</ion-option>
+        <ion-option>8</ion-option>
+        <ion-option>9</ion-option>
+    </ion-select>
     </ion-item>
     <button ion-button (click)="saveWeight()">Save</button>
   </form>
-
-  
-
-  <div id="showWeight"></div>
-
 </ion-content>
