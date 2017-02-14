@@ -15,7 +15,7 @@ export class ChartsPage {
 
   private readings: Array<Reading> = new Array();
 
-  private weightData = [80,81];
+  private weightData = [];
 
   public lineChartLegend: boolean = true;
   public lineChartType: string = 'line';
@@ -29,10 +29,13 @@ export class ChartsPage {
     return moment().add(days, 'd');
   }
 
-  public lineChartLabels: Array<any> = [this.newDate(-1),this.newDate(1)];
+  public lineChartLabels: Array<any> = [];
 
   constructor(public navCtrl: NavController, private storage: Storage) {
     storage.get('readings').then((result) => {
+      if (result == null) {
+        return;
+      }
       for (let reading of result) {
         console.log("Reading.weight: ",reading.weight);
         this.weightData.push(Number(reading.weight));
@@ -45,7 +48,7 @@ export class ChartsPage {
   }
 
   getData():Array<any> {
-    console.log("getting data...", this.lineChartData);
+    //console.log("getting data...", this.lineChartData);
     return this.lineChartData
   }
 

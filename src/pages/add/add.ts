@@ -16,7 +16,6 @@ export class AddPage {
   
     addWeightFormGroup: FormGroup;
     reading:Reading= new Reading();
-    readings: Array<Reading> = new Array();
     myDate: String = new Date().toISOString();
 
   constructor(
@@ -32,7 +31,7 @@ export class AddPage {
 
     storage.get('readings').then((result) => {
       if (result == null) {
-        storage.set("readings", this.readings);
+        storage.set("readings", new Array());
       }
     });
 
@@ -47,6 +46,9 @@ export class AddPage {
       console.log(typeof(this.reading.weight));
       this.reading.date = this.addWeightFormGroup.value.date;
       readings.push(this.reading);
+
+      readings.sort((r1,r2) => (r1.date.localeCompare(r2.date)));
+
       this.storage.set("readings", readings);
       this.navCtrl.push(ChartsPage);
   
