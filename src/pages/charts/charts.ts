@@ -15,12 +15,13 @@ export class ChartsPage {
 
   private readings: Array<Reading> = new Array();
 
-  public lineChartLegend: boolean = true;
+  private weightData = [80,81];
 
+  public lineChartLegend: boolean = true;
   public lineChartType: string = 'line';
 
-  public lineChartData: Array<any> = [{
-    data: [80,82.3, 81.9],
+  private lineChartData: Array<any> = [{
+    data: this.weightData,
     label: 'kg'
   }];
 
@@ -28,16 +29,36 @@ export class ChartsPage {
     return moment().add(days, 'd');
   }
 
-  public lineChartLabels: Array<any> = [this.newDate(-4), this.newDate(-3), this.newDate(20)];
+  public lineChartLabels: Array<any> = [this.newDate(-1),this.newDate(1)];
 
   constructor(public navCtrl: NavController, private storage: Storage) {
     storage.get('readings').then((result) => {
-      console.log("RESULT", result);
       for (let reading of result) {
-        console.log("Reading: ",reading);
+        console.log("Reading.weight: ",reading.weight);
+        this.weightData.push(Number(reading.weight));
+        this.lineChartLabels.push(moment(reading.date));
       }
-      console.log("Labels", this.lineChartLabels);
+      console.log("Weight", this.weightData);
+      console.log("labels", this.lineChartLabels);
+      this.refresh();
     });
+  }
+
+  getData():Array<any> {
+    console.log("getting data...", this.lineChartData);
+    return this.lineChartData
+  }
+
+  public refresh():void {
+    // hmm... how to refresh without making a copy?
+    let _lineChartData:Array<any> = new Array(this.lineChartData.length);
+    for (let i = 0; i < this.lineChartData.length; i++) {
+      _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
+      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
+        _lineChartData[i].data[j] = this.lineChartData[i].data[j];//Math.floor((Math.random() * 100) + 1);
+      }
+    }
+    this.lineChartData = _lineChartData;
   }
 
   public lineChartOptions: any = {

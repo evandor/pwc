@@ -1,7 +1,7 @@
 export class Reading {
   
-    weight: number;
-    date:   string; 
+    public weight: number;
+    public date:   string; 
 
     constructor (weight?: number, date?:string) {
         this.weight=weight;
