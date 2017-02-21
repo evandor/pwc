@@ -1,37 +1,22 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Add
+      <h3>Add</h3>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
-   <form [formGroup]="addWeightFormGroup">
-    <ion-item>
+  <div id="inputBox">
+   <ion-item>
       <ion-label>Date</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="date" [(ngModel)]="myDate"></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY"  [(ngModel)]="date"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Weight</ion-label>
-      <ion-select formControlName="kilogram">
-        <ion-option checked="true">50</ion-option>
-        <ion-option>60</ion-option>
-        <ion-option>70</ion-option>
-      </ion-select>
-      <ion-select formControlName="gram">
-        <ion-option>1</ion-option>
-        <ion-option>2</ion-option>
-        <ion-option>3</ion-option>
-        <ion-option>4</ion-option>
-        <ion-option>5</ion-option>
-        <ion-option checked="true">6</ion-option>
-        <ion-option>7</ion-option>
-        <ion-option>8</ion-option>
-        <ion-option>9</ion-option>
-    </ion-select>
+      <ion-input type="number"  [(ngModel)]="weight"></ion-input>
     </ion-item>
     <button ion-button (click)="saveWeight()">Save</button>
-  </form>
+  
+  </div>
 </ion-content>

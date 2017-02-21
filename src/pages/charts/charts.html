@@ -1,12 +1,26 @@
-<ion-header>
-  <ion-navbar>
+<ion-header class="page-charts">
+  <ion-navbar >
     <ion-title>
-      Charts
+      <h3>Charts</h3>
     </ion-title>
+    
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+  <ion-fab top right edge>
+    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list>
+       <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY"  [(ngModel)]="date"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Weight</ion-label>
+      <ion-input type="number"  [(ngModel)]="weight"></ion-input>
+    </ion-item>
+    </ion-fab-list>
+  </ion-fab>
   <div class="row">
     <div class="col-md-6">
       <div style="display: block;">
