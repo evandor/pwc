@@ -23,7 +23,7 @@ export class AddPage {
 
     storage.get('readings').then((result) => {
       if (result == null) {
-        storage.set("readings", this.readings);
+        storage.set("readings", new Array());
       }
     });
   }
@@ -38,6 +38,7 @@ export class AddPage {
     this.storage.set("readings", readings);
     this.navCtrl.push(ChartsPage);
     });     
+
   }
     
 }
