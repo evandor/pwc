@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { Reading } from '../../domain/reading';
+
+import {Observable} from 'rxjs/Rx';
 
 import * as moment from 'moment';
 
@@ -11,7 +13,7 @@ import * as moment from 'moment';
   selector: 'page-charts',
   templateUrl: 'charts.html'
 })
-export class ChartsPage {
+export class ChartsPage implements OnInit {
 
   private readings: Array<Reading> = new Array();
 
@@ -31,8 +33,34 @@ export class ChartsPage {
 
   public lineChartLabels: Array<any> = [];
 
+  private observable: any;
+
   constructor(public navCtrl: NavController, private storage: Storage) {
-    storage.get('readings').then((result) => {
+    console.log("in charts constructor");
+
+    //var readings = storage.get('readings');
+    this.observable = Observable.fromPromise(storage.get('readings'));
+    
+
+    /*storage.get('readings').then((result) => {
+      if (result == null) {
+        return;
+      }
+      for (let reading of result) {
+        console.log("Reading.weight: ",reading.weight);
+        this.weightData.push(Number(reading.weight));
+        this.lineChartLabels.push(moment(reading.date));
+      }
+      console.log("Weight", this.weightData);
+      console.log("labels", this.lineChartLabels);
+      this.refresh();
+    });*/
+  }
+
+  ngOnInit() {
+    console.log("in on init");
+    this.observable.subscribe((result) => {
+      console.log("calling obserable");
       if (result == null) {
         return;
       }

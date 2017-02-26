@@ -11,11 +11,11 @@ import { ChartsPage } from '../charts/charts';
 })
 
 export class AddPage {
-  
-    reading:Reading= new Reading();
-    readings: Array<Reading> = new Array();
-    date: string = new Date().toISOString();
-    weight:any;
+
+  reading: Reading = new Reading();
+  readings: Array<Reading> = new Array();
+  date: string = new Date().toISOString();
+  weight: any;
 
   constructor(
     public navCtrl: NavController,
@@ -28,17 +28,16 @@ export class AddPage {
     });
   }
 
-  saveWeight(){
+  saveWeight() {
     this.storage.get("readings").then((readings) => {
-    console.log("Gewicht und Datum: "+this.weight+" "+this.date);
-    this.reading.weight=this.weight;
-    this.reading.date = this.date;
-    readings.push(this.reading);
-    readings.sort((r1,r2)=>r1.date.localeCompare(r2.date));
-    this.storage.set("readings", readings);
-    this.navCtrl.push(ChartsPage);
-    });     
+      console.log("Gewicht und Datum: " + this.weight + " " + this.date);
+      this.reading.weight = this.weight;
+      this.reading.date = this.date;
+      readings.push(this.reading);
+      readings.sort((r1, r2) => r1.date.localeCompare(r2.date));
+      this.storage.set("readings", readings).then(() => {this.navCtrl.push(ChartsPage)});
+    });
 
   }
-    
+
 }
