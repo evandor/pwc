@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
 import { Reading } from '../../domain/reading';
-
-import {Observable} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
+import { BaseChartDirective } from 'ng2-charts';
 
 import * as moment from 'moment';
 
@@ -15,81 +13,41 @@ import * as moment from 'moment';
 })
 export class ChartsPage implements OnInit {
 
-  private readings: Array<Reading> = new Array();
+  @ViewChild(BaseChartDirective)
+  private chartDirective: BaseChartDirective;
 
-  private weightData = [];
-
-  public lineChartLegend: boolean = true;
-  public lineChartType: string = 'line';
+  private lineChartLegend: boolean = true;
+  private lineChartLabels: Array<any> = [];
+  private readings: any;
 
   private lineChartData: Array<any> = [{
-    data: this.weightData,
+    data: new Array(),
     label: 'kg'
   }];
+
+  constructor(public navCtrl: NavController, private storage: Storage) {
+    this.readings = Observable.fromPromise(storage.get('readings'));
+  }
+
+  ngOnInit() {
+    this.readings.subscribe((result) => {
+      if (result == null) {
+        return;
+      }
+      for (let reading of result) {
+        this.lineChartData[0]['data'].push(Number(reading.weight));
+        this.lineChartLabels.push(moment(reading.date));
+      }
+      this.chartDirective.chart.update();
+    });
+  }
 
   newDate(days) {
     return moment().add(days, 'd');
   }
 
-  public lineChartLabels: Array<any> = [];
-
-  private observable: any;
-
-  constructor(public navCtrl: NavController, private storage: Storage) {
-    console.log("in charts constructor");
-
-    //var readings = storage.get('readings');
-    this.observable = Observable.fromPromise(storage.get('readings'));
-    
-
-    /*storage.get('readings').then((result) => {
-      if (result == null) {
-        return;
-      }
-      for (let reading of result) {
-        console.log("Reading.weight: ",reading.weight);
-        this.weightData.push(Number(reading.weight));
-        this.lineChartLabels.push(moment(reading.date));
-      }
-      console.log("Weight", this.weightData);
-      console.log("labels", this.lineChartLabels);
-      this.refresh();
-    });*/
-  }
-
-  ngOnInit() {
-    console.log("in on init");
-    this.observable.subscribe((result) => {
-      console.log("calling obserable");
-      if (result == null) {
-        return;
-      }
-      for (let reading of result) {
-        console.log("Reading.weight: ",reading.weight);
-        this.weightData.push(Number(reading.weight));
-        this.lineChartLabels.push(moment(reading.date));
-      }
-      console.log("Weight", this.weightData);
-      console.log("labels", this.lineChartLabels);
-      this.refresh();
-    });
-  }
-
-  getData():Array<any> {
-    //console.log("getting data...", this.lineChartData);
+  getData(): Array<any> {
     return this.lineChartData
-  }
-
-  public refresh():void {
-    // hmm... how to refresh without making a copy?
-    let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = this.lineChartData[i].data[j];//Math.floor((Math.random() * 100) + 1);
-      }
-    }
-    this.lineChartData = _lineChartData;
   }
 
   public lineChartOptions: any = {
@@ -99,7 +57,7 @@ export class ChartsPage implements OnInit {
         type: 'time',
         time: {
           displayFormats: {
-          	'millisecond': 'MMM DD',
+            'millisecond': 'MMM DD',
             'second': 'MMM DD',
             'minute': 'MMM DD',
             'hour': 'MMM DD',
@@ -113,6 +71,7 @@ export class ChartsPage implements OnInit {
       }],
     },
   };
+
   public lineChartColors: Array<any> = [
     {
       backgroundColor: 'rgba(148,159,177,0.2)',
