@@ -23,22 +23,21 @@ export class ChartsPage implements OnInit {
   private observable: any;
 
   private data: Array<Reading> = [];
-  private minDate: String;
 
   private startDate;
+
+  private minWeight: number = 40;
+  private maxWeight: number = 120;
 
   private lineChartData: Array<any> = [{
     data: new Array(),
     label: 'kg'
   }];
 
-  newDate(days) {
-    return moment().add(days, 'd');
-  }
+
 
   constructor(public navCtrl: NavController, private storage: Storage) {
     this.observable = Observable.fromPromise(storage.get('readings'));
-    this.minDate = "2016-02-08";
     this.startDate = moment().add(-7, 'd');
   }
 
@@ -49,7 +48,8 @@ export class ChartsPage implements OnInit {
       if (result == null) {
         return;
       }
-      this.setChartData(result, this.getReferenceDate('week'));
+      this.setStartDate('week')
+      this.setChartData(result);
     });
   }
 
@@ -57,44 +57,51 @@ export class ChartsPage implements OnInit {
     return this.lineChartData
   }
 
-  private getReferenceDate(range): Date {
-    var referenceDate = new Date();
+  private setStartDate(range) {
     var rangeDaysBack = 7;
     switch (range) {
       case 'week': {
-        referenceDate.setDate(referenceDate.getDate() - 7);
         this.startDate = moment().add(-7, 'd');
-        return referenceDate;
+        break;
       }
       case 'month': {
-        referenceDate.setDate(referenceDate.getDate() - 31);
         this.startDate = moment().add(-31, 'd');
-        return referenceDate;
+        break;
       }
       case 'year': {
-        referenceDate.setDate(referenceDate.getDate() - 365);
         this.startDate = moment().add(-365, 'd');
-        return referenceDate;
+        break;
       }
       default: {
-        referenceDate.setDate(referenceDate.getDate() - 7);
         this.startDate = moment().add(-7, 'd');
-        return referenceDate;
+        break;
       }
     }
   }
 
-  private setChartData(result: Array<Reading>, referenceDate: Date) {
+  private setChartData(result: Array<Reading>) {
     this.lineChartData[0]['data'] = [];
     this.lineChartLabels = [];
-    for (let reading of result) {
-      //if (moment(reading.date).isAfter(referenceDate)) {
-        this.lineChartData[0]['data'].push(Number(reading.weight));
-        this.lineChartLabels.push(moment(reading.date));
-      //}
+    if (result.length > 0) {
+      this.minWeight = Number(result[0].weight);
+      this.maxWeight = Number(result[0].weight);
     }
-    console.log("Data", this.lineChartData[0]);
-    console.log("Labels", this.lineChartLabels);
+    for (let reading of result) {
+      var theWeight = Number(reading.weight);
+      if (theWeight > this.maxWeight) {
+        this.maxWeight = theWeight;
+      }
+      if (theWeight < this.minWeight) {
+        this.minWeight = theWeight;
+      }
+      this.lineChartData[0]['data'].push(theWeight);
+      this.lineChartLabels.push(moment(reading.date));
+    }
+
+    var padding = Math.round(0.01 * this.maxWeight);
+    this.maxWeight = this.maxWeight + padding;
+    this.minWeight = this.minWeight - padding;
+
     this.chartDirective.chart.update();
   }
 
@@ -102,6 +109,12 @@ export class ChartsPage implements OnInit {
     return {
       responsive: false,
       scales: {
+        yAxes: [{
+          ticks: {
+            min: this.minWeight,
+            max: this.maxWeight
+          }
+        }],
         xAxes: [{
           type: 'time',
           time: {
@@ -142,12 +155,10 @@ export class ChartsPage implements OnInit {
     console.log("ShowAllData clicked");
   }
 
-  setRange(r: string) {
-    console.log(r);
-    var referenceDate = this.getReferenceDate(r);
-    //this.minDate = moment(referenceDate).format("yyyy-MM-dd");
-    console.log("MIN date", this.minDate);
-    this.setChartData(this.data, referenceDate);
+  setRange(range: string) {
+    var referenceDate = this.setStartDate(range);
+    this.setStartDate(range);
+    this.setChartData(this.data);
   }
 
 }
