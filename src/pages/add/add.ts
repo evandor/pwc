@@ -34,10 +34,9 @@ export class AddPage {
       this.reading.weight = this.weight;
       this.reading.date = this.date;
       readings.push(this.reading);
-      readings.sort((r1, r2) => r1.date.localeCompare(r2.date));
+      readings.sort((r1, r2) => (r1.date.localeCompare(r2.date)));
       this.storage.set("readings", readings).then(() => {this.navCtrl.push(ChartsPage)});
     });
-
   }
 
 }
