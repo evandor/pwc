@@ -41,9 +41,33 @@ export class ChartsPage implements OnInit {
       if (result == null) {
         return;
       }
+      var referenceDate = new Date();
+      var rangeDaysBack = 7;
+      switch (this.range) {
+        case 'week': {
+          referenceDate.setDate(referenceDate.getDate()-7);
+          break;
+        }
+        case 'month': {
+          referenceDate.setDate(referenceDate.getDate()-31);
+          break;
+        }
+        case 'year': {
+          referenceDate.setDate(referenceDate.getDate()-365);
+          break;
+        }
+        default: {
+          referenceDate.setDate(referenceDate.getDate()-7);
+          break;
+        }
+      }
       for (let reading of result) {
-        this.lineChartData[0]['data'].push(Number(reading.weight));
-        this.lineChartLabels.push(moment(reading.date));
+        console.log("Reading.date", moment(reading.date));
+        console.log("Ref Date", referenceDate);
+        if (moment(reading.date).isAfter(referenceDate)) {
+          this.lineChartData[0]['data'].push(Number(reading.weight));
+          this.lineChartLabels.push(moment(reading.date));
+        }
       }
       this.chartDirective.chart.update();
     });
@@ -54,7 +78,7 @@ export class ChartsPage implements OnInit {
   }
 
   public lineChartOptions: any = {
-    responsive: false,
+    responsive: true,
     scales: {
       xAxes: [{
         type: 'time',
