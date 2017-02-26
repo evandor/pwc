@@ -17,20 +17,24 @@ export class ChartsPage implements OnInit {
   private chartDirective: BaseChartDirective;
 
   private lineChartLegend: boolean = true;
+  private lineChartType: string = 'line';
   private lineChartLabels: Array<any> = [];
-  private readings: any;
+  private observable: any;
 
   private lineChartData: Array<any> = [{
     data: new Array(),
     label: 'kg'
   }];
 
+  newDate(days) {
+    return moment().add(days, 'd');
+  }
   constructor(public navCtrl: NavController, private storage: Storage) {
-    this.readings = Observable.fromPromise(storage.get('readings'));
+    this.observable = Observable.fromPromise(storage.get('readings'));
   }
 
   ngOnInit() {
-    this.readings.subscribe((result) => {
+    this.observable.subscribe((result) => {
       if (result == null) {
         return;
       }
@@ -40,10 +44,6 @@ export class ChartsPage implements OnInit {
       }
       this.chartDirective.chart.update();
     });
-  }
-
-  newDate(days) {
-    return moment().add(days, 'd');
   }
 
   getData(): Array<any> {
