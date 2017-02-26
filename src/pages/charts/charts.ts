@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { Reading } from '../../domain/reading';
 import { Observable } from 'rxjs/Rx';
 import { BaseChartDirective } from 'ng2-charts';
+import { AddPage } from '../add/add';
 
 import * as moment from 'moment';
 
@@ -20,6 +21,7 @@ export class ChartsPage implements OnInit {
   private lineChartType: string = 'line';
   private lineChartLabels: Array<any> = [];
   private observable: any;
+  private range:String = "week";
 
   private lineChartData: Array<any> = [{
     data: new Array(),
@@ -29,6 +31,7 @@ export class ChartsPage implements OnInit {
   newDate(days) {
     return moment().add(days, 'd');
   }
+
   constructor(public navCtrl: NavController, private storage: Storage) {
     this.observable = Observable.fromPromise(storage.get('readings'));
   }
@@ -82,5 +85,13 @@ export class ChartsPage implements OnInit {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
+
+  openAddPage(){
+    this.navCtrl.push(AddPage);
+  }
+
+  openDataPage(){
+    console.log("ShowAllData clicked");
+  }
 
 }

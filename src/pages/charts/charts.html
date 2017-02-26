@@ -1,26 +1,33 @@
 <ion-header class="page-charts">
-  <ion-navbar >
+  <ion-navbar hideBackButton="true">
     <ion-title>
-      <h3>Charts</h3>
+      Weight
     </ion-title>
-    
+    <ion-buttons end>
+      <button ion-button icon-only type="submit" (click)="openAddPage()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+  <ion-toolbar no-border-top>
+    <div padding>
+     <ion-segment [(ngModel)]="range">
+      <ion-segment-button value="week">
+        Week
+      </ion-segment-button>
+      <ion-segment-button value="month">
+        Month
+      </ion-segment-button>
+      <ion-segment-button value="year">
+        Year
+      </ion-segment-button>
+    </ion-segment>
+    </div>
+</ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-fab top right edge>
-    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
-    <ion-fab-list>
-       <ion-item>
-      <ion-label>Date</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY"  [(ngModel)]="date"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label>Weight</ion-label>
-      <ion-input type="number"  [(ngModel)]="weight"></ion-input>
-    </ion-item>
-    </ion-fab-list>
-  </ion-fab>
+  
   <div class="row">
     <div class="col-md-6">
       <div style="display: block;">
@@ -40,4 +47,10 @@
       </table>
     </div>-->
   </div>
+
+  <ion-list inset>
+  <button ion-item (click)="openDataPage()">
+    Show All Data
+  </button> 
+</ion-list>
 </ion-content>
