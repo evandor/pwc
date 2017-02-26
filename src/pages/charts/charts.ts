@@ -21,7 +21,11 @@ export class ChartsPage implements OnInit {
   private lineChartType: string = 'line';
   private lineChartLabels: Array<any> = [];
   private observable: any;
-  private range:String = "week";
+
+  private data: Array<Reading> = [];
+  private minDate: String;
+
+  private startDate;
 
   private lineChartData: Array<any> = [{
     data: new Array(),
@@ -34,42 +38,18 @@ export class ChartsPage implements OnInit {
 
   constructor(public navCtrl: NavController, private storage: Storage) {
     this.observable = Observable.fromPromise(storage.get('readings'));
+    this.minDate = "2016-02-08";
+    this.startDate = moment().add(-7, 'd');
   }
 
   ngOnInit() {
+    var ctx = this;
     this.observable.subscribe((result) => {
+      ctx.data = result;
       if (result == null) {
         return;
       }
-      var referenceDate = new Date();
-      var rangeDaysBack = 7;
-      switch (this.range) {
-        case 'week': {
-          referenceDate.setDate(referenceDate.getDate()-7);
-          break;
-        }
-        case 'month': {
-          referenceDate.setDate(referenceDate.getDate()-31);
-          break;
-        }
-        case 'year': {
-          referenceDate.setDate(referenceDate.getDate()-365);
-          break;
-        }
-        default: {
-          referenceDate.setDate(referenceDate.getDate()-7);
-          break;
-        }
-      }
-      for (let reading of result) {
-        console.log("Reading.date", moment(reading.date));
-        console.log("Ref Date", referenceDate);
-        if (moment(reading.date).isAfter(referenceDate)) {
-          this.lineChartData[0]['data'].push(Number(reading.weight));
-          this.lineChartLabels.push(moment(reading.date));
-        }
-      }
-      this.chartDirective.chart.update();
+      this.setChartData(result, this.getReferenceDate('week'));
     });
   }
 
@@ -77,27 +57,71 @@ export class ChartsPage implements OnInit {
     return this.lineChartData
   }
 
-  public lineChartOptions: any = {
-    responsive: true,
-    scales: {
-      xAxes: [{
-        type: 'time',
-        time: {
-          displayFormats: {
-            'millisecond': 'MMM DD',
-            'second': 'MMM DD',
-            'minute': 'MMM DD',
-            'hour': 'MMM DD',
-            'day': 'MMM DD',
-            'week': 'MMM DD',
-            'month': 'MMM DD',
-            'quarter': 'MMM DD',
-            'year': 'MMM DD',
+  private getReferenceDate(range): Date {
+    var referenceDate = new Date();
+    var rangeDaysBack = 7;
+    switch (range) {
+      case 'week': {
+        referenceDate.setDate(referenceDate.getDate() - 7);
+        this.startDate = moment().add(-7, 'd');
+        return referenceDate;
+      }
+      case 'month': {
+        referenceDate.setDate(referenceDate.getDate() - 31);
+        this.startDate = moment().add(-31, 'd');
+        return referenceDate;
+      }
+      case 'year': {
+        referenceDate.setDate(referenceDate.getDate() - 365);
+        this.startDate = moment().add(-365, 'd');
+        return referenceDate;
+      }
+      default: {
+        referenceDate.setDate(referenceDate.getDate() - 7);
+        this.startDate = moment().add(-7, 'd');
+        return referenceDate;
+      }
+    }
+  }
+
+  private setChartData(result: Array<Reading>, referenceDate: Date) {
+    this.lineChartData[0]['data'] = [];
+    this.lineChartLabels = [];
+    for (let reading of result) {
+      //if (moment(reading.date).isAfter(referenceDate)) {
+        this.lineChartData[0]['data'].push(Number(reading.weight));
+        this.lineChartLabels.push(moment(reading.date));
+      //}
+    }
+    console.log("Data", this.lineChartData[0]);
+    console.log("Labels", this.lineChartLabels);
+    this.chartDirective.chart.update();
+  }
+
+  getLineChartOptions() {
+    return {
+      responsive: false,
+      scales: {
+        xAxes: [{
+          type: 'time',
+          time: {
+            min: this.startDate.format("YYYY-MM-DD"),
+            displayFormats: {
+              'millisecond': 'MMM DD',
+              'second': 'MMM DD',
+              'minute': 'MMM DD',
+              'hour': 'MMM DD',
+              'day': 'MMM DD',
+              'week': 'MMM DD',
+              'month': 'MMM DD',
+              'quarter': 'MMM DD',
+              'year': 'MMM DD',
+            }
           }
-        }
-      }],
-    },
-  };
+        }],
+      },
+    }
+  }
 
   public lineChartColors: Array<any> = [
     {
@@ -110,12 +134,20 @@ export class ChartsPage implements OnInit {
     }
   ];
 
-  openAddPage(){
+  openAddPage() {
     this.navCtrl.push(AddPage);
   }
 
-  openDataPage(){
+  openDataPage() {
     console.log("ShowAllData clicked");
+  }
+
+  setRange(r: string) {
+    console.log(r);
+    var referenceDate = this.getReferenceDate(r);
+    //this.minDate = moment(referenceDate).format("yyyy-MM-dd");
+    console.log("MIN date", this.minDate);
+    this.setChartData(this.data, referenceDate);
   }
 
 }
