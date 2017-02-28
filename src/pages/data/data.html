@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>All Saved Data</ion-title>
+    <ion-buttons end>
+      <button ion-button type="submit" (click)="deleteAllData()">
+        Delete All
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="noSavedData()">There is no saved data.</div>
+  <div *ngIf="!noSavedData()">
+    <ion-list>
+      <ion-item-sliding *ngFor="let item of storedData">
+        <ion-item>
+          <ion-icon name="speedometer" item-left color="hotpink"></ion-icon>
+          {{ item?.weight }}
+          <ion-note item-right>
+            {{ item?.date|timestampPipe }}
+          </ion-note>
+        </ion-item>
+        <ion-item-options>
+          <button ion-button color="danger" (click)="removeItem(item)"><ion-icon name="trash"></ion-icon></button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+</ion-content>

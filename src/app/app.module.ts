@@ -1,20 +1,24 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { TargetPage } from '../pages/target/target';
 import { AddPage } from '../pages/add/add';
 import { ChartsPage } from '../pages/charts/charts';
-import { ProfilePage } from '../pages/profile/profile';
+import { DataPage } from '../pages/data/data';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { Storage } from '@ionic/storage';
+import {TimestampPipe} from '../pipes/timestamp-pipe';
 
 @NgModule({
   declarations: [
     MyApp,
+    TargetPage,
     AddPage,
     ChartsPage,
-    ProfilePage,
-    TabsPage
+    DataPage,
+    TabsPage,
+    TimestampPipe
   ],
   imports: [
     ChartsModule,
@@ -23,9 +27,10 @@ import { Storage } from '@ionic/storage';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    TargetPage,
     AddPage,
     ChartsPage,
-    ProfilePage,
+    DataPage,
     TabsPage
   ],
   providers: [

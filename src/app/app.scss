@@ -17,7 +17,14 @@
 
     
 
-    
+      @font-face {
+        font-family: AppFont;
+        src: url("../assets/fonts/Lobster-Regular.ttf");
+}
+
+    ion-title {
+        font-family: 'AppFont' !important;
+    }
 
     
 

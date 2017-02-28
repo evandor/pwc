@@ -15,11 +15,11 @@
   <div id="inputBox">
     <form [formGroup]="addWeightFormGroup" (ngSubmit)="saveWeight()">
    <ion-item>
-      <ion-label>Date</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="date"></ion-datetime>
+      <ion-note item-left>Date</ion-note>
+      <ion-datetime displayFormat="DD MMM YYYY" formControlName="date"></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-label>kg</ion-label>
+      <ion-note item-left>kg</ion-note>
       <ion-input id="weightInput" type="number"  formControlName="weight"></ion-input>
     </ion-item>
     </form>

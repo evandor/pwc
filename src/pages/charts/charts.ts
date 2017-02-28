@@ -5,6 +5,8 @@ import { Reading } from '../../domain/reading';
 import { Observable } from 'rxjs/Rx';
 import { BaseChartDirective } from 'ng2-charts';
 import { AddPage } from '../add/add';
+import { TargetPage } from '../target/target';
+import { DataPage } from '../data/data';
 
 import * as moment from 'moment';
 
@@ -36,7 +38,9 @@ export class ChartsPage implements OnInit {
 
 
 
-  constructor(public navCtrl: NavController, private storage: Storage) {
+  constructor(
+    public navCtrl: NavController, 
+    private storage: Storage) {
     this.observable = Observable.fromPromise(storage.get('readings'));
     this.startDate = moment().add(-7, 'd');
   }
@@ -152,7 +156,11 @@ export class ChartsPage implements OnInit {
   }
 
   openDataPage() {
-    console.log("ShowAllData clicked");
+    this.navCtrl.push(DataPage);
+  }
+
+   openTargetPage(){
+    this.navCtrl.push(TargetPage);
   }
 
   setRange(range: string) {
