@@ -117,23 +117,25 @@ export class ChartsPage implements OnInit {
         yAxes: [{
           ticks: {
             min: this.minWeight,
-            max: this.maxWeight
+            max: this.maxWeight,
+            stepSize: 2
           }
         }],
         xAxes: [{
           type: 'time',
           time: {
             min: this.startDate.format("YYYY-MM-DD"),
+            unitStepSize: 12,
             displayFormats: {
-              'millisecond': 'MMM DD',
-              'second': 'MMM DD',
-              'minute': 'MMM DD',
+              'millisecond': 'MMM DD [ms]',
+              'second': 'MMM DD [s]',
+              'minute': 'MMM DD [m]',
               'hour': 'MMM DD',
               'day': 'MMM DD',
               'week': 'MMM DD',
-              'month': 'MMM DD',
-              'quarter': 'MMM DD',
-              'year': 'MMM DD',
+              'month': 'MMM DD [mo]',
+              'quarter': 'MMM YYYY [q]',
+              'year': 'MMM YYYY [y]',
             }
           }
         }],
@@ -143,8 +145,8 @@ export class ChartsPage implements OnInit {
 
   public lineChartColors: Array<any> = [
     {
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
+      backgroundColor: 'rgba(255, 102, 153,0.2)',
+      borderColor: 'rgba(255, 102, 153,1)',
       pointBackgroundColor: 'rgba(148,159,177,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
