@@ -31,18 +31,19 @@ export class ChartsPage implements OnInit {
   private minWeight: number = 40;
   private maxWeight: number = 120;
 
+  private range: String = "week";
+
   private lineChartData: Array<any> = [{
     data: new Array(),
     label: 'kg'
   }];
 
-
-
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     private storage: Storage) {
     this.observable = Observable.fromPromise(storage.get('readings'));
     this.startDate = moment().add(-7, 'd');
+    this.range = "week"
   }
 
   ngOnInit() {
@@ -111,7 +112,7 @@ export class ChartsPage implements OnInit {
 
   getLineChartOptions() {
     return {
-      responsive: false,
+      responsive: true,
       scales: {
         yAxes: [{
           ticks: {
@@ -159,7 +160,7 @@ export class ChartsPage implements OnInit {
     this.navCtrl.push(DataPage);
   }
 
-   openTargetPage(){
+  openTargetPage() {
     this.navCtrl.push(TargetPage);
   }
 
