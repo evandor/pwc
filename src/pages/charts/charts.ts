@@ -22,39 +22,47 @@ export class ChartsPage implements OnInit {
   private lineChartLegend: boolean = true;
   private lineChartType: string = 'line';
   private lineChartLabels: Array<any> = [];
-  private observable: any;
+
+  private readings: Observable<Array<Reading>>;
+  private target: Observable<Reading>;
 
   private data: Array<Reading> = [];
+  private targetData:Reading;
 
   private startDate;
 
-  private minWeight: number = 40;
-  private maxWeight: number = 120;
+  private minWeight: number = 70;
+  private maxWeight: number = 80;
 
   private range: String = "week";
 
-  private lineChartData: Array<any> = [{
-    data: new Array(),
-    label: 'kg'
-  }];
+  private lineChartData: Array<any> = [
+    { data: new Array(), label: 'IST' },
+    { data: new Array(), label: 'SOLL' }
+  ];
 
   constructor(
     public navCtrl: NavController,
     private storage: Storage) {
-    this.observable = Observable.fromPromise(storage.get('readings'));
+    this.readings = Observable.fromPromise(storage.get('readings'));
+    this.target = Observable.fromPromise(storage.get('target'));
     this.startDate = moment().add(-7, 'd');
     this.range = "week"
   }
 
   ngOnInit() {
     var ctx = this;
-    this.observable.subscribe((result) => {
+    this.readings.subscribe((result) => {
       ctx.data = result;
       if (result == null) {
         return;
       }
       this.setStartDate('week')
-      this.setChartData(result);
+      //var innerCtx = ctx;
+      this.target.subscribe((targetValue) => {
+        ctx.targetData = targetValue;
+        this.setChartData(result, targetValue)
+      });
     });
   }
 
@@ -84,9 +92,11 @@ export class ChartsPage implements OnInit {
     }
   }
 
-  private setChartData(result: Array<Reading>) {
+  private setChartData(result: Array<Reading>, targetValue: Reading) {
     this.lineChartData[0]['data'] = [];
+    this.lineChartData[1]['data'] = [];
     this.lineChartLabels = [];
+
     if (result.length > 0) {
       this.minWeight = Number(result[0].weight);
       this.maxWeight = Number(result[0].weight);
@@ -106,6 +116,16 @@ export class ChartsPage implements OnInit {
     var padding = Math.round(0.01 * this.maxWeight);
     this.maxWeight = this.maxWeight + padding;
     this.minWeight = this.minWeight - padding;
+
+    if (targetValue != null && result.length > 0) {
+      this.lineChartData[1]['data'] = [{
+        x: moment(result[0].date),
+        y: 79
+      }, {
+        x: moment(targetValue.date),
+        y: 75
+      }]
+    }
 
     this.chartDirective.chart.update();
   }
@@ -151,6 +171,14 @@ export class ChartsPage implements OnInit {
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    },
+    { // dark grey
+      backgroundColor: 'rgba(77,83,96,0.2)',
+      borderColor: 'rgba(77,83,96,1)',
+      pointBackgroundColor: 'rgba(77,83,96,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,83,96,1)'
     }
   ];
 
@@ -169,7 +197,7 @@ export class ChartsPage implements OnInit {
   setRange(range: string) {
     var referenceDate = this.setStartDate(range);
     this.setStartDate(range);
-    this.setChartData(this.data);
+    this.setChartData(this.data, this.targetData);
   }
 
 }

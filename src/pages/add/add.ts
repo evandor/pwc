@@ -36,6 +36,7 @@ export class AddPage {
       if (result == null) {
         storage.set("readings", new Array());
       }
+      document.getElementsByTagName("input")[0].focus();
     });
 
   }
