@@ -37,6 +37,7 @@ export class ChartsPage implements OnInit {
   private maxWeight: number = 80;
 
   private range: String = "week";
+  private currentRange: String;
 
   private lineChartData: Array<any> = [
     { data: new Array(), label: 'IST' },
@@ -50,7 +51,8 @@ export class ChartsPage implements OnInit {
     this.readings = Observable.fromPromise(storage.get('readings'));
     this.target = Observable.fromPromise(storage.get('target'));
     this.startDate = moment().add(-7, 'd');
-    this.range = "week"
+    this.range = "week";
+    
   }
 
   ngOnInit() {
@@ -70,8 +72,9 @@ export class ChartsPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    console.log("onInit charts: " + this.model.getRange())
-    this.setRange("year")
+    console.log("onInit charts: " + this.model.getRange());
+    this.setRange("year");
+    this.currentRange=this.model.getRangeAsString();
   }
 
   getData(): Array<any> {
@@ -211,5 +214,7 @@ export class ChartsPage implements OnInit {
     this.setStartDate(range);
     this.setChartData(this.data, this.targetData);
   }
+
+
 
 }
