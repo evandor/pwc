@@ -71,10 +71,10 @@ export class ChartsPage implements OnInit {
     });
   }
 
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     console.log("onInit charts: " + this.model.getRange());
     this.setRange("year");
-    this.currentRange=this.model.getRangeAsString();
+    this.currentRange=this.model.getRangeAsString2();
   }
 
   getData(): Array<any> {

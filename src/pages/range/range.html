@@ -8,23 +8,24 @@
 
 
 <ion-content padding>
-  <ion-list radio-group inset>
+  <ion-list radio-group inset [(ngModel)]="availableRanges">
 
     <ion-item>
       <ion-label>Last week</ion-label>
-      <ion-radio (ionSelect)="setRange(0)" color="hotpink"></ion-radio>
+      <ion-radio value="week" (ionSelect)="setRange(0)" color="hotpink"></ion-radio>
     </ion-item>
 
     <ion-item>
       <ion-label>Last month</ion-label>
-      <ion-radio (ionSelect)="setRange(1)" color="hotpink"></ion-radio>
+      <ion-radio value="month" (ionSelect)="setRange(1)" color="hotpink"></ion-radio>
     </ion-item>
 
     <ion-item>
       <ion-label>Last year</ion-label>
-      <ion-radio (ionSelect)="setRange(2)" color="hotpink"></ion-radio>
+      <ion-radio value="year" (ionSelect)="setRange(2)" color="hotpink"></ion-radio>
     </ion-item>
 
   </ion-list>
+
 
 </ion-content>

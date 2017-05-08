@@ -19,17 +19,19 @@ export class PwcModel {
     return this.range
   }
 
-  getRangeAsString() {
+  
 
+    getRangeAsString() {
+      
     switch (this.range) {
       case 0: {
-        return "Last week";
+        return "week";
       }
       case 1: {
-        return "Last month";
+        return "month";
       }
       case 2: {
-        return "Last year";
+        return "year";
       }
       default: {
         return "Unknown";
@@ -37,5 +39,10 @@ export class PwcModel {
     }
 
   }
+  getRangeAsString2() {
+    return "Last " + this.getRangeAsString();
+
+  }
+
 
 }
