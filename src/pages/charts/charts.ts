@@ -7,6 +7,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import { AddPage } from '../add/add';
 import { TargetPage } from '../target/target';
 import { DataPage } from '../data/data';
+import { RangePage } from '../range/range';
 
 import * as moment from 'moment';
 
@@ -19,7 +20,7 @@ export class ChartsPage implements OnInit {
   @ViewChild(BaseChartDirective)
   private chartDirective: BaseChartDirective;
 
-  private lineChartLegend: boolean = true;
+  private lineChartLegend: boolean = false;
   private lineChartType: string = 'line';
   private lineChartLabels: Array<any> = [];
 
@@ -192,6 +193,10 @@ export class ChartsPage implements OnInit {
 
   openTargetPage() {
     this.navCtrl.push(TargetPage);
+  }
+
+  openRangePage(){
+    this.navCtrl.push(RangePage);
   }
 
   setRange(range: string) {

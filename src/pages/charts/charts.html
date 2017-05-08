@@ -9,21 +9,6 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar no-border-top>
-    <div padding>
-     <ion-segment [(ngModel)]="range">
-      <ion-segment-button value="week" (click)="setRange('week')">
-        Week
-      </ion-segment-button>
-      <ion-segment-button value="month" (click)="setRange('month')">
-        Month
-      </ion-segment-button>
-      <ion-segment-button value="year" (click)="setRange('year')">
-        Year
-      </ion-segment-button>
-    </ion-segment>
-    </div>
-</ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -56,10 +41,16 @@
 
   <ion-list inset>
   <button ion-item (click)="openDataPage()">
-    Show All Data
+    Entries
   </button> 
+  <button ion-item (click)="openRangePage()">
+    Range
+     <ion-note item-right>
+      Last week
+      </ion-note>
+  </button>
   <button ion-item (click)="openTargetPage()">
-    Set Target
+    Goal
   </button> 
 </ion-list>
 </ion-content>

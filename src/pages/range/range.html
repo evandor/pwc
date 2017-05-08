@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <h3>Range</h3>
+      </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+
+
+
+  <ion-list radio-group [(ngModel)]="rangeSelected" inset>
+
+  <ion-item>
+    <ion-label>Last week</ion-label>
+    <ion-radio value="week" checked color="hotpink"></ion-radio>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Last month</ion-label>
+    <ion-radio value="month" color="hotpink"></ion-radio>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Last year</ion-label>
+    <ion-radio value="year" color="hotpink"></ion-radio>
+  </ion-item>
+
+</ion-list>
+
+</ion-content>

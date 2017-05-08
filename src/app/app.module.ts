@@ -5,6 +5,7 @@ import { TargetPage } from '../pages/target/target';
 import { AddPage } from '../pages/add/add';
 import { ChartsPage } from '../pages/charts/charts';
 import { DataPage } from '../pages/data/data';
+import { RangePage } from '../pages/range/range';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { Storage } from '@ionic/storage';
@@ -17,6 +18,7 @@ import {TimestampPipe} from '../pipes/timestamp-pipe';
     AddPage,
     ChartsPage,
     DataPage,
+    RangePage,
     TabsPage,
     TimestampPipe
   ],
@@ -31,6 +33,7 @@ import {TimestampPipe} from '../pipes/timestamp-pipe';
     AddPage,
     ChartsPage,
     DataPage,
+    RangePage,
     TabsPage
   ],
   providers: [
