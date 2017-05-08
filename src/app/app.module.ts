@@ -10,6 +10,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { Storage } from '@ionic/storage';
 import {TimestampPipe} from '../pipes/timestamp-pipe';
+import {PwcModel} from '../model/pwcModel'
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {TimestampPipe} from '../pipes/timestamp-pipe';
     TabsPage
   ],
   providers: [
+    PwcModel,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Storage
   ]

@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>
       <h3>Range</h3>
-      </ion-title>
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -12,23 +12,23 @@
 
 
 
-  <ion-list radio-group [(ngModel)]="rangeSelected" inset>
+  <ion-list radio-group inset>
 
-  <ion-item>
-    <ion-label>Last week</ion-label>
-    <ion-radio value="week" checked color="hotpink"></ion-radio>
-  </ion-item>
+    <ion-item>
+      <ion-label>Last week</ion-label>
+      <ion-radio (ionSelect)="setRange(0)" checked color="hotpink"></ion-radio>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Last month</ion-label>
-    <ion-radio value="month" color="hotpink"></ion-radio>
-  </ion-item>
+    <ion-item>
+      <ion-label>Last month</ion-label>
+      <ion-radio (ionSelect)="setRange(1)" color="hotpink"></ion-radio>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Last year</ion-label>
-    <ion-radio value="year" color="hotpink"></ion-radio>
-  </ion-item>
+    <ion-item>
+      <ion-label>Last year</ion-label>
+      <ion-radio (ionSelect)="setRange(2)" color="hotpink"></ion-radio>
+    </ion-item>
 
-</ion-list>
+  </ion-list>
 
 </ion-content>

@@ -8,6 +8,7 @@ import { AddPage } from '../add/add';
 import { TargetPage } from '../target/target';
 import { DataPage } from '../data/data';
 import { RangePage } from '../range/range';
+import { PwcModel} from '../../model/pwcModel';
 
 import * as moment from 'moment';
 
@@ -44,7 +45,8 @@ export class ChartsPage implements OnInit {
 
   constructor(
     public navCtrl: NavController,
-    private storage: Storage) {
+    private storage: Storage,
+    private model: PwcModel) {
     this.readings = Observable.fromPromise(storage.get('readings'));
     this.target = Observable.fromPromise(storage.get('target'));
     this.startDate = moment().add(-7, 'd');
@@ -65,6 +67,11 @@ export class ChartsPage implements OnInit {
         this.setChartData(result, targetValue)
       });
     });
+  }
+
+  ionViewDidEnter() {
+    console.log("onInit charts: " + this.model.getRange())
+    this.setRange("year")
   }
 
   getData(): Array<any> {
