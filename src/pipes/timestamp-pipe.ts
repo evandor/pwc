@@ -7,6 +7,6 @@ import * as moment from 'moment';
 export class TimestampPipe{
 	
 	transform(value) {
-		return moment(value).format('DD MMM YYYY'); 
+		return moment(value).format('MMM DD, YYYY HH:mm'); 
 	}
 }

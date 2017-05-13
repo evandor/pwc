@@ -39,8 +39,23 @@ export class PwcModel {
     }
 
   }
+
   getRangeAsString2() {
-    return "Last " + this.getRangeAsString();
+      
+    switch (this.range) {
+      case 0: {
+        return "Last 7 days";
+      }
+      case 1: {
+        return "Last 30 days";
+      }
+      case 2: {
+        return "Last 365 days";
+      }
+      default: {
+        return "Unknown";
+      }
+    }
 
   }
 

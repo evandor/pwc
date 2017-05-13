@@ -2,11 +2,11 @@
 
   <ion-navbar>
     <ion-title>
-      <h3>All Saved Data</h3>
-      </ion-title>
+      Entries
+    </ion-title>
     <ion-buttons end>
-      <button ion-button type="submit" (click)="deleteAllData()">
-        Delete All
+      <button ion-button type="submit" (click)="editEntries()">
+        Edit
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -20,8 +20,7 @@
     <ion-list>
       <ion-item-sliding *ngFor="let item of storedData">
         <ion-item>
-          <ion-icon name="speedometer" item-left color="hotpink"></ion-icon>
-          {{ item?.weight }}
+          {{ item?.weight }} kg
           <ion-note item-right>
             {{ item?.date|timestampPipe }}
           </ion-note>

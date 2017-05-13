@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      <h3>Weight</h3>
+      Weight
     </ion-title>
     <ion-buttons end>
       <button ion-button type="submit" [disabled]="!addWeightFormGroup.valid" (click)="saveWeight()">
@@ -14,14 +14,15 @@
 <ion-content padding>
   <div id="inputBox">
     <form [formGroup]="addWeightFormGroup" (ngSubmit)="saveWeight()">
-   <ion-item>
-      <ion-note item-left>Date</ion-note>
-      <ion-datetime displayFormat="DD MMM YYYY" formControlName="date"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-note item-left>kg</ion-note>
-      <ion-input id="weightInput" type="number"  formControlName="weight" autofocus></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-note item-left>Weight</ion-note>
+        <ion-input id="weightInput" type="number"  formControlName="weight" autofocus></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-note item-left>Date</ion-note>
+        <ion-datetime displayFormat="MMM DD, YYYY HH:mm" formControlName="date"></ion-datetime>
+      </ion-item>
+
     </form>
   </div>
 </ion-content>

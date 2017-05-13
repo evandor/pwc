@@ -32,6 +32,10 @@ export class DataPage {
     
   }
 
+  editEntries(){
+    
+  }
+
  removeItem(item){
    
    for(var i = 0; i < this.storedData.length; i++) {
