@@ -25,10 +25,10 @@ export class ChartsPage implements OnInit {
   private lineChartType: string = 'line';
   private lineChartLabels: Array<any> = [];
 
-  private readings: Observable<Array<Reading>>;
+  //private readings: Observable<Array<Reading>>;
   private target: Observable<Reading>;
 
-  private data: Array<Reading> = [];
+ // private data: Array<Reading> = [];
   private targetData:Reading;
 
   private startDate;
@@ -48,7 +48,7 @@ export class ChartsPage implements OnInit {
     public navCtrl: NavController,
     private storage: Storage,
     private model: PwcModel) {
-    this.readings = Observable.fromPromise(storage.get('readings'));
+    //this.readings = Observable.fromPromise(storage.get('readings'));
     this.target = Observable.fromPromise(storage.get('target'));
     this.startDate = moment().add(-7, 'd');
     this.range = "week";
@@ -56,7 +56,9 @@ export class ChartsPage implements OnInit {
   }
 
   ngOnInit() {
-    var ctx = this;
+    //this.data = 
+    this.setChartData(this.model.getReadings())
+    /*var ctx = this;
     this.readings.subscribe((result) => {
       ctx.data = result;
       if (result == null) {
@@ -68,7 +70,7 @@ export class ChartsPage implements OnInit {
         ctx.targetData = targetValue;
         this.setChartData(result, targetValue)
       });
-    });
+    });*/
   }
 
   ionViewWillEnter() {
@@ -82,7 +84,6 @@ export class ChartsPage implements OnInit {
   }
 
   private setStartDate(range) {
-    var rangeDaysBack = 7;
     switch (range) {
       case 'week': {
         this.startDate = moment().add(-7, 'd');
@@ -103,7 +104,7 @@ export class ChartsPage implements OnInit {
     }
   }
 
-  private setChartData(result: Array<Reading>, targetValue: Reading) {
+  private setChartData(result: Array<Reading>) { //, targetValue: Reading) {
     this.lineChartData[0]['data'] = [];
     this.lineChartData[1]['data'] = [];
     this.lineChartLabels = [];
@@ -128,7 +129,7 @@ export class ChartsPage implements OnInit {
     this.maxWeight = this.maxWeight + padding;
     this.minWeight = this.minWeight - padding;
 
-    if (targetValue != null && result.length > 0) {
+    /*if (targetValue != null && result.length > 0) {
       this.lineChartData[1]['data'] = [{
         x: moment(result[0].date),
         y: 79
@@ -136,9 +137,12 @@ export class ChartsPage implements OnInit {
         x: moment(targetValue.date),
         y: 75
       }]
-    }
+    }*/
 
-    this.chartDirective.chart.update();
+    if (this.chartDirective.chart != null) {
+      console.log("updating chart")
+      this.chartDirective.chart.update();
+    }
   }
 
   getLineChartOptions() {
@@ -210,9 +214,8 @@ export class ChartsPage implements OnInit {
   }
 
   setRange(range: string) {
-    var referenceDate = this.setStartDate(range);
     this.setStartDate(range);
-    this.setChartData(this.data, this.targetData);
+    //this.setChartData(this.data)//, this.targetData);
   }
 
 
