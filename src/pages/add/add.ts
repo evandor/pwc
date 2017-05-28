@@ -16,68 +16,24 @@ import * as moment from 'moment';
 
 export class AddPage {
 
-  reading: Reading = new Reading();
-  //readings: Array<Reading> = new Array();
   addWeightFormGroup: FormGroup;
-  weight: any;
-  overwrite: any;
 
   constructor(
-    public navCtrl: NavController,
+    private navCtrl: NavController,
     private formBuilder: FormBuilder,
-    public storage: Storage,
-    public alertCtrl: AlertController,
     private model: PwcModel) {
 
     this.addWeightFormGroup = this.formBuilder.group({
       date: [new Date().toISOString(), Validators.required],
       weight: ['', Validators.required]
     });
-
-    storage.get('readings').then((result) => {
-      if (result == null) {
-        storage.set("readings", new Array());
-      }
-      document.getElementsByTagName("input")[0].focus();
-    });
-
   }
 
   saveWeight() {
-    //create new reading object
-    this.reading.weight = this.addWeightFormGroup.value.weight;
-    this.reading.date = this.addWeightFormGroup.value.date;
-
-    var collisionIndex = this.model.addReadingIfNew(this.reading)
-    if (collisionIndex >= 0) {
-      this.showConfirm(collisionIndex);
-    }
+    var reading = new Reading();
+    reading.weight = this.addWeightFormGroup.value.weight;
+    reading.date = this.addWeightFormGroup.value.date;
+    this.model.addReading(reading)
     this.navCtrl.push(ChartsPage)
   }
-
-  showConfirm(index: number) {
-    let confirm = this.alertCtrl.create({
-      message: 'Do you wish to overwrite existing entry?',
-      buttons: [
-        {
-          text: 'No',
-          handler: () => {
-            console.log('Disagree clicked');
-            this.navCtrl.push(ChartsPage);
-          }
-        },
-        {
-          text: 'Yes',
-          handler: () => {
-            console.log('Agree clicked');
-            this.model.addReadingAndOverwrite(this.reading)
-            this.navCtrl.push(ChartsPage)
-          }
-        }
-      ]
-    });
-    confirm.present();
-  }
-
-
 }

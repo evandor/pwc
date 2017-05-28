@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { RangeEnum } from '../domain/rangeEnum'
 import { Reading } from '../domain/reading'
 import { Storage } from '@ionic/storage';
+import { ChartsPage } from '../pages/charts/charts';
 
 import * as moment from 'moment';
 
@@ -9,13 +10,18 @@ import * as moment from 'moment';
 export class PwcModel {
 
   private range = RangeEnum.WEEK;
+  private target: Reading = null
   private readings: Array<Reading> = [];
 
   constructor(private storage: Storage) { }
 
+  /* === Ranges ====================================== */
+
   public setRange(r: RangeEnum) {
-    console.log("setting range: ", r)
     this.range = r
+    if (this.range == null) {
+      this.range = RangeEnum.WEEK
+    }
     this.storage.set("range", this.range);
   }
 
@@ -32,65 +38,59 @@ export class PwcModel {
     }
   }
 
+  getRangeAsString2() {
+    switch (this.range) {
+      case 0: { return "Last 7 days"; }
+      case 1: { return "Last 30 days"; }
+      case 2: { return "Last 365 days"; }
+      default: { return "Unknown"; }
+    }
+  }
+
+  /* === Readings ====================================== */
+
   public setReadings(readings: Array<Reading>) {
-    console.log("setting readings: ", readings)
     this.readings = readings
+    if (this.readings == null) {
+      this.readings = [];
+    }
+    console.log("currentReadings: ", this.readings)
   }
 
   public getReadings() {
     return this.readings
   }
 
-  public addReadingIfNew(reading: Reading) {
-    var collisionIndex = this.getCollisionIndex(reading)
-    if (collisionIndex >= 0) {
-      return collisionIndex
-    }
-    this.addReading(reading)
-    return -1
-  }
-
-  public addReadingAndOverwrite(reading: Reading) {
-    var collisionIndex = this.getCollisionIndex(reading)
-    if (collisionIndex >= 0) {
-      this.readings.splice(collisionIndex, 1, reading);
-    }
-    this.addReading(reading)
-  }
-
-  private addReading(reading: Reading) {
+  public addReading(reading: Reading) {
+    console.log("adding Reading ", reading)
     this.readings.push(reading);
     this.readings.sort((r1, r2) => (r1.date.localeCompare(r2.date)));
-    this.storage.set("readings", this.readings);//.then(() => { this.navCtrl.push(ChartsPage) });
+    this.storage.set("readings", this.readings);
+    console.log("currentReadings: ", this.readings)
   }
 
-  private getCollisionIndex(reading: Reading) {
+  public deleteReading(reading: Reading) {
     for (var i = 0; i < this.readings.length; i++) {
-      if (moment(this.readings[i].date).format('YYYY MM DD') == moment(reading.date).format('YYYY MM DD')) {
-        return i;
+      if (this.readings[i] == reading) {
+        this.readings.splice(i, 1);
       }
     }
-    return -1
+    this.storage.set("readings", this.readings);
   }
 
-  getRangeAsString2() {
-      
-    switch (this.range) {
-      case 0: {
-        return "Last 7 days";
-      }
-      case 1: {
-        return "Last 30 days";
-      }
-      case 2: {
-        return "Last 365 days";
-      }
-      default: {
-        return "Unknown";
-      }
+  public getLatestReading() {
+    if (this.readings.length > 0) {
+      return this.readings[this.readings.length - 1]
     }
-
+    return null;
   }
 
+  public getAverageWeight() {
+    if (this.readings.length == 0) {
+      return 0;
+    }
+    var sum = this.readings.map(reading => reading.weight).reduce((a1,a2) => a1+a2,0)
+    return sum / this.readings.length
+  }
 
 }

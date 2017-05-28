@@ -15,9 +15,9 @@
   
   <div class="row">
     <div class="col-md-6">
-      <div style="display: block;margin:50px;">
+      <div style="display: block;margin:10px;">
         <canvas 
-            baseChart width="400" height="200" 
+            baseChart width="400" height="300" 
             [datasets]="getData()" 
             [labels]="lineChartLabels" 
             [options]="getLineChartOptions()"
@@ -27,21 +27,7 @@
         </canvas>
       </div>
     </div>
-    <!--<div class="col-md-6" style="margin-bottom: 10px">
-      <table class="table table-responsive table-condensed">
-        <tr>
-          <th *ngFor="let label of lineChartLabels">{{label}}</th>
-        </tr>
-        <tr *ngFor="let d of lineChartData">
-          <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
-        </tr>
-      </table>
-    </div>-->
   </div>
-
-
-
-
 
   <ion-card id="weightCard">
     <ion-row no-padding>
@@ -52,19 +38,19 @@
       </ion-col>
       <ion-col text-right>
         <ion-item class="item item-trns">
-          <h1 item-right color="light">65 kg</h1>
+          <h1 item-right color="light">{{ latestReading?.weight }} kg</h1>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row no-padding>
       <ion-col>
         <ion-item class="item item-trns">
-          <p item-left color="light">Average: 68 kg</p>
+          <p item-left color="light">Average: {{averageWeight}} kg</p>
         </ion-item>
       </ion-col>
       <ion-col text-right>
         <ion-item class="item item-trns">
-          <p item-right color="light">12.05.17, 11:00</p>
+          <p item-right color="light">{{ latestReading?.date }}</p>
         </ion-item>
       </ion-col>
     </ion-row>

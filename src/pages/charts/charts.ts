@@ -8,7 +8,7 @@ import { AddPage } from '../add/add';
 import { TargetPage } from '../target/target';
 import { DataPage } from '../data/data';
 import { RangePage } from '../range/range';
-import { PwcModel} from '../../model/pwcModel';
+import { PwcModel } from '../../model/pwcModel';
 
 import * as moment from 'moment';
 
@@ -24,20 +24,13 @@ export class ChartsPage implements OnInit {
   private lineChartLegend: boolean = false;
   private lineChartType: string = 'line';
   private lineChartLabels: Array<any> = [];
-
-  //private readings: Observable<Array<Reading>>;
-  private target: Observable<Reading>;
-
- // private data: Array<Reading> = [];
-  private targetData:Reading;
-
   private startDate;
-
   private minWeight: number = 70;
   private maxWeight: number = 80;
-
   private range: String = "week";
   private currentRange: String;
+  private latestReading: Reading = null;
+  private averageWeight = 0;
 
   private lineChartData: Array<any> = [
     { data: new Array(), label: 'IST' },
@@ -48,35 +41,22 @@ export class ChartsPage implements OnInit {
     public navCtrl: NavController,
     private storage: Storage,
     private model: PwcModel) {
-    //this.readings = Observable.fromPromise(storage.get('readings'));
-    this.target = Observable.fromPromise(storage.get('target'));
     this.startDate = moment().add(-7, 'd');
     this.range = "week";
-    
   }
 
   ngOnInit() {
-    //this.data = 
-    this.setChartData(this.model.getReadings())
-    /*var ctx = this;
-    this.readings.subscribe((result) => {
-      ctx.data = result;
-      if (result == null) {
-        return;
-      }
-      this.setStartDate('week')
-      //var innerCtx = ctx;
-      this.target.subscribe((targetValue) => {
-        ctx.targetData = targetValue;
-        this.setChartData(result, targetValue)
-      });
-    });*/
   }
 
   ionViewWillEnter() {
+    console.log("charts.ts: reading model data...")
+    this.setChartData(this.model.getReadings())
+    console.log("charts.ts: ", this.model.getReadings())
     console.log("onInit charts: " + this.model.getRange());
     this.setRange("year");
-    this.currentRange=this.model.getRangeAsString2();
+    this.currentRange = this.model.getRangeAsString2();
+    this.latestReading = this.model.getLatestReading();
+    this.averageWeight = this.model.getAverageWeight();
   }
 
   getData(): Array<any> {
@@ -129,16 +109,6 @@ export class ChartsPage implements OnInit {
     this.maxWeight = this.maxWeight + padding;
     this.minWeight = this.minWeight - padding;
 
-    /*if (targetValue != null && result.length > 0) {
-      this.lineChartData[1]['data'] = [{
-        x: moment(result[0].date),
-        y: 79
-      }, {
-        x: moment(targetValue.date),
-        y: 75
-      }]
-    }*/
-
     if (this.chartDirective.chart != null) {
       console.log("updating chart")
       this.chartDirective.chart.update();
@@ -180,20 +150,13 @@ export class ChartsPage implements OnInit {
 
   public lineChartColors: Array<any> = [
     {
-      backgroundColor: 'rgba(255, 102, 153,0.2)',
-      borderColor: 'rgba(255, 102, 153,1)',
+      //backgroundColor: 'rgba(255, 102, 153,0.2)',
+      borderColor: 'rgba(132,202,202,1)',
+      borderWidth: 5,
       pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
+      pointBorderColor: '#999',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
     }
   ];
 
@@ -209,13 +172,12 @@ export class ChartsPage implements OnInit {
     this.navCtrl.push(TargetPage);
   }
 
-  openRangePage(){
+  openRangePage() {
     this.navCtrl.push(RangePage);
   }
 
   setRange(range: string) {
     this.setStartDate(range);
-    //this.setChartData(this.data)//, this.targetData);
   }
 
 
