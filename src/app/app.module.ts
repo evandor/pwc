@@ -11,6 +11,8 @@ import { EntriesPage } from '../pages/entries/entries';
 import { GoalPage } from '../pages/goal/goal';
 import { RangePage } from '../pages/range/range';
 import { TimestampPipe } from './../pipes/timestamp/timestamp';
+import {Model} from '../domain/model'
+import { IonicStorageModule } from '@ionic/storage'
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { TimestampPipe } from './../pipes/timestamp/timestamp';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -38,6 +42,7 @@ import { TimestampPipe } from './../pipes/timestamp/timestamp';
   providers: [
     StatusBar,
     SplashScreen,
+    Model,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

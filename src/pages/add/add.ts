@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController} from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Entry } from '../../domain/entry';
+import { Model } from '../../domain/model';
+import { HomePage } from '../home/home';
 
-/**
- * Generated class for the AddPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-add',
@@ -14,11 +12,25 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class AddPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  addWeightFormGroup: FormGroup;
+
+  constructor(
+    private navCtrl: NavController, 
+    private formBuilder: FormBuilder,
+    private model: Model) {
+
+      this.addWeightFormGroup = this.formBuilder.group({
+        date: [new Date().toISOString(), Validators.required],
+        weight: ['', Validators.required]
+      });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddPage');
+  saveWeight() {
+    var entry = new Entry();
+    entry.weight = this.addWeightFormGroup.value.weight;
+    entry.date = this.addWeightFormGroup.value.date;
+    //this.model.addEntry(entry);
+    this.navCtrl.push(HomePage);
   }
 
 }
