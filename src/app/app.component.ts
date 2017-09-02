@@ -1,33 +1,22 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
-import { ChartsPage } from '../pages/charts/charts';
-import { PwcModel } from '../model/pwcModel';
-import { Storage } from '@ionic/storage';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { HomePage } from '../pages/home/home';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  
-  rootPage = ChartsPage;
+  rootPage:any = HomePage;
 
-  constructor(platform: Platform, model: PwcModel, storage: Storage) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      console.log("in MyApp constructor...")
-      storage.get('readings').then((readings) => {
-        console.log("readings read from storage...")
-        model.setReadings(readings)
-        storage.get('range').then((range) => {
-          console.log("range read from storage...")
-          model.setRange(range)
-          StatusBar.styleDefault();
-          console.log("hiding splashscreen")
-          Splashscreen.hide();
-        });
-      })
+      statusBar.styleDefault();
+      splashScreen.hide();
     });
   }
 }
+

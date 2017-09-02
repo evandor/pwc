@@ -1,5 +1,0 @@
-cd <into project dir> 
-npm install
-ionic platform add ios
-ionic build ios
-
