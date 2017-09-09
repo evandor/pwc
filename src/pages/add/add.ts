@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Entry } from '../../domain/entry';
@@ -14,6 +14,8 @@ export class AddPage {
 
   addWeightFormGroup: FormGroup;
 
+  @ViewChild('input') myInput ;
+
   constructor(
     private navCtrl: NavController, 
     private formBuilder: FormBuilder,
@@ -26,11 +28,19 @@ export class AddPage {
       });
   }
 
+  ionViewLoaded() {
+    
+        setTimeout(() => {
+          this.myInput.setFocus();
+        },150);
+    
+     }
+
   saveWeight() {
     var entry = new Entry();
     entry.weight = this.addWeightFormGroup.value.weight;
     entry.date = this.addWeightFormGroup.value.date;
-    entry.time = this.addWeightFormGroup.value.time;
+    //entry.time = this.addWeightFormGroup.value.time;
     //this.model.addEntry(entry);
     this.navCtrl.push(HomePage);
   }

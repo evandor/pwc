@@ -13,7 +13,10 @@ export class Model {
   private goal: Entry = null;
   private entries: Array<Entry> = [];
 
-  constructor(private storage: Storage) { }
+  constructor(private storage: Storage) {
+    this.entries.push(new Entry(80,new Date().toISOString()))
+    this.entries.push(new Entry(82,new Date().toISOString()))
+   }
 
   /* === Ranges ====================================== */
 

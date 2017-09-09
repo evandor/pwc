@@ -14,6 +14,7 @@ import { TimestampPipe } from './../pipes/timestamp/timestamp';
 import { Model } from '../domain/model'
 import { IonicStorageModule } from '@ionic/storage'
 import { ChartComponent } from '../components/chart/chart'
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ChartComponent } from '../components/chart/chart'
   ],
   imports: [
     BrowserModule,
+    ChartsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
 

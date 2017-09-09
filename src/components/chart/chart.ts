@@ -18,8 +18,6 @@ import moment from 'moment';
 })
 export class ChartComponent implements OnInit {
 
-  text: string;
-
   @ViewChild(BaseChartDirective)
   private chartDirective: BaseChartDirective;
 
@@ -45,8 +43,6 @@ export class ChartComponent implements OnInit {
 
     this.startDate = moment().add(-7, 'd');
     this.range = "week";
-    console.log('Hello ChartComponent Component');
-    this.text = 'Hello World';
   }
 
   ngOnInit() { }
@@ -63,6 +59,7 @@ export class ChartComponent implements OnInit {
   }
 
   getData(): Array<any> {
+    console.log("Getting data: ", this.lineChartData)
     return this.lineChartData
   }
 
