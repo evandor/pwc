@@ -14,13 +14,18 @@
   <ion-content padding>
     <div id="inputBox">
       <form [formGroup]="addWeightFormGroup" (ngSubmit)="saveWeight()">
+        
+        <ion-item>
+          <ion-note item-left>Date</ion-note>
+          <ion-datetime displayFormat="MMM DD, YYYY" formControlName="date"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-note item-left>Time</ion-note>
+          <ion-datetime displayFormat="HH:mm" formControlName="time"></ion-datetime>
+        </ion-item>
         <ion-item>
           <ion-note item-left>Weight</ion-note>
           <ion-input id="weightInput" type="number"  formControlName="weight" autofocus></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-note item-left>Date</ion-note>
-          <ion-datetime displayFormat="MMM DD, YYYY HH:mm" formControlName="date"></ion-datetime>
         </ion-item>
   
       </form>
