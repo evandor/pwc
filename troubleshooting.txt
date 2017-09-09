@@ -1,0 +1,4 @@
+
+unable to locate DeviceSupport directory:
+
+  https://github.com/phonegap/ios-deploy/issues/292

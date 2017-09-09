@@ -11,8 +11,9 @@ import { EntriesPage } from '../pages/entries/entries';
 import { GoalPage } from '../pages/goal/goal';
 import { RangePage } from '../pages/range/range';
 import { TimestampPipe } from './../pipes/timestamp/timestamp';
-import {Model} from '../domain/model'
+import { Model } from '../domain/model'
 import { IonicStorageModule } from '@ionic/storage'
+import { ChartComponent } from '../components/chart/chart'
 
 @NgModule({
   declarations: [
@@ -22,13 +23,14 @@ import { IonicStorageModule } from '@ionic/storage'
     EntriesPage,
     GoalPage,
     RangePage,
-    TimestampPipe
+    TimestampPipe,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
-    
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +45,7 @@ import { IonicStorageModule } from '@ionic/storage'
     StatusBar,
     SplashScreen,
     Model,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }

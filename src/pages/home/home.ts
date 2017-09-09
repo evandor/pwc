@@ -6,6 +6,7 @@ import { AddPage } from '../add/add';
 import { GoalPage } from '../goal/goal';
 import { EntriesPage } from '../entries/entries';
 import { RangePage } from '../range/range';
+import { ChartComponent } from '../../components/chart/chart'
 
 
 @Component({
