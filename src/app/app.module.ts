@@ -30,7 +30,10 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
   imports: [
     BrowserModule,
     ChartsModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      backButtonText: 'Cancel',
+      backButtonIcon: ''
+     }),
     IonicStorageModule.forRoot()
 
   ],

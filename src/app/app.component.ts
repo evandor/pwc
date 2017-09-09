@@ -21,17 +21,28 @@ export class MyApp {
       
     platform.ready().then(() => {
 
+      
+
       console.log("in MyApp constructor...")
       storage.get('entries').then((entries) => {
         console.log("entries read from storage...")
-        model.setEntries(entries)
+        model.setEntries(entries);
         storage.get('range').then((range) => {
           console.log("range read from storage...")
-          model.setRange(range)
+          model.setRange(range);
+          
+          storage.get('goal').then((goal) => {
+            console.log("goal read from storage...")
+            model.setGoal(goal);
+        
           statusBar.styleDefault();
           console.log("hiding splashscreen")
           splashScreen.hide();
         });
+
+      });
+
+
       })
     });
   }

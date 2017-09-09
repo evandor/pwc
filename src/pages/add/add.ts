@@ -14,7 +14,7 @@ export class AddPage {
 
   addWeightFormGroup: FormGroup;
 
-  @ViewChild('input') myInput ;
+  @ViewChild('inputEntry') myInput ;
 
   constructor(
     private navCtrl: NavController, 
@@ -29,7 +29,6 @@ export class AddPage {
   }
 
   ionViewLoaded() {
-    
         setTimeout(() => {
           this.myInput.setFocus();
         },150);
@@ -41,8 +40,12 @@ export class AddPage {
     entry.weight = this.addWeightFormGroup.value.weight;
     entry.date = this.addWeightFormGroup.value.date;
     //entry.time = this.addWeightFormGroup.value.time;
-    //this.model.addEntry(entry);
+    this.model.addEntry(entry);
     this.navCtrl.push(HomePage);
+  }
+
+  cancelEntry(){
+
   }
 
 }

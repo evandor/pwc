@@ -1,10 +1,10 @@
 export class Goal {
   
-    public goal: number;
-    public date:   string; 
+    public targetWeight: number;
+    public date: string; 
 
-    constructor (goal?: number, date?:string) {
-        this.goal=goal;
+    constructor (targetWeight?: number, date?:string) {
+        this.targetWeight=targetWeight;
         this.date=date;
     }
 }

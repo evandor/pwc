@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Model } from '../../domain/model';
+import { Goal } from '../../domain/goal';
+import { HomePage } from '../home/home';
 
-/**
- * Generated class for the GoalPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-goal',
@@ -14,11 +12,38 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class GoalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  addGoalFormGroup: FormGroup;
+  @ViewChild('inputGoal') myInput ;
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private formBuilder: FormBuilder,
+    private model: Model) {
+
+      this.addGoalFormGroup = this.formBuilder.group({
+        date: [new Date().toISOString(), Validators.required],
+        targetWeight: ['', Validators.required]
+      });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad GoalPage');
+  ionViewLoaded() {
+    setTimeout(() => {
+      this.myInput.setFocus();
+    },150);
+
+ }
+
+  saveGoal(){
+    var goal = new Goal();
+    goal.targetWeight = this.addGoalFormGroup.value.targetWeight;
+    goal.date = this.addGoalFormGroup.value.date;
+    this.model.addGoal(goal);
+    this.navCtrl.push(HomePage);
+
   }
 
 }
+
+
+

@@ -4,9 +4,11 @@ import { Storage } from '@ionic/storage';
 import { Entry } from '../../domain/entry';
 import { AddPage } from '../add/add';
 import { GoalPage } from '../goal/goal';
+import { Goal } from '../../domain/goal';
 import { EntriesPage } from '../entries/entries';
 import { RangePage } from '../range/range';
-import { ChartComponent } from '../../components/chart/chart'
+import { ChartComponent } from '../../components/chart/chart';
+import { Model } from '../../domain/model';
 
 
 @Component({
@@ -15,7 +17,17 @@ import { ChartComponent } from '../../components/chart/chart'
 })
 export class HomePage{
 
-  constructor(public navCtrl: NavController) {
+  private latestEntry: Entry = null;
+  private averageWeight = 0;
+  private currentGoal: Goal=null;
+  
+
+  constructor(
+    public navCtrl: NavController,
+    private model: Model) {
+    this.latestEntry = this.model.getLatestEntry();
+    this.averageWeight = this.model.getAverageWeight();
+    this.currentGoal = this.model.getGoal();
   }
 
   openAddPage() {

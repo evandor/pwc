@@ -1,13 +1,13 @@
-<ion-header class="page-home">
+<ion-header class="page-home" no-border>
   <ion-navbar hideBackButton="true">
     <ion-title>
       Weight Tracker
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only type="submit" (click)="openAddPage()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
+        <button ion-button (click)="openAddPage()" large>
+          <ion-icon name="add" color="hotpink"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -26,19 +26,19 @@
       </ion-col>
       <ion-col text-right>
         <ion-item class="item item-trns">
-          <h1 item-right color="light">70 kg</h1>
+          <h1 item-right color="light">{{ latestEntry?.weight }} kg</h1>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row no-padding>
       <ion-col>
         <ion-item class="item item-trns">
-          <p item-left color="light">Average: 69 kg</p>
+          <p item-left color="light">Average: {{averageWeight}} kg</p>
         </ion-item>
       </ion-col>
       <ion-col text-right>
         <ion-item class="item item-trns">
-          <p item-right color="light">11.09.2017</p>
+          <p item-right color="light">{{ latestEntry?.date }}</p>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -59,6 +59,9 @@
   <button ion-item (click)="openGoalPage()">
     <ion-icon name="locate-outline" item-left color="grey"></ion-icon>
     Goal
+    <ion-note item-right>
+        {{ currentGoal?.targetWeight }} kg
+      </ion-note>
   </button> 
  
 </ion-list>

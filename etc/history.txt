@@ -1,0 +1,7 @@
+
+
+Navigating Lifecycle Events:
+http://blog.ionic.io/navigating-lifecycle-events/
+
+Keyboard:
+https://ionicframework.com/docs/native/keyboard/

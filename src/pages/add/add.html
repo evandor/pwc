@@ -1,10 +1,10 @@
 <ion-header>
     <ion-navbar>
       <ion-title>
-        Weight
+        New Entry
       </ion-title>
       <ion-buttons end>
-        <button ion-button type="submit" [disabled]="!addWeightFormGroup.valid" (click)="saveWeight()">
+        <button ion-button type="submit" [disabled]="!addWeightFormGroup.valid" (click)="saveWeight()" large>
           Add
         </button>
       </ion-buttons>
@@ -25,9 +25,11 @@
         </ion-item>
         <ion-item>
           <ion-note item-left>Weight</ion-note>
-          <ion-input #input id="weightInput" type="number"  formControlName="weight" autofocus></ion-input>
+          <ion-input #inputEntry type="number"  formControlName="weight" autofocus></ion-input>
         </ion-item>
   
       </form>
     </div>
   </ion-content>
+
+

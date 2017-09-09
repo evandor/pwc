@@ -3,6 +3,7 @@ import { RangeEnum } from '../domain/rangeEnum'
 import { Entry } from '../domain/entry'
 import { Storage } from '@ionic/storage';
 import { HomePage } from '../pages/home/home';
+import { Goal } from '../domain/goal';
 
 //import * as moment from 'moment';
 
@@ -10,7 +11,7 @@ import { HomePage } from '../pages/home/home';
 export class Model {
 
   private range = RangeEnum.WEEK;
-  private goal: Entry = null;
+  private goal: Goal = null;
   private entries: Array<Entry> = [];
 
   constructor(private storage: Storage) {
@@ -29,7 +30,7 @@ export class Model {
   }
 
   public getRange() {
-    return this.range
+    return this.range;
   }
 
   getRangeAsString() {
@@ -44,7 +45,7 @@ export class Model {
   /* === Entries ====================================== */
 
   public setEntries(entries: Array<Entry>) {
-    this.entries = entries
+    this.entries = entries;
     if (this.entries == null) {
       this.entries = [];
     }
@@ -52,7 +53,7 @@ export class Model {
   }
 
   public getEntries() {
-    return this.entries
+    return this.entries;
   }
 
   public addEntry(entry: Entry) {
@@ -86,5 +87,21 @@ export class Model {
     var sum = this.entries.map(entry => entry.weight).reduce((a1,a2) => a1+a2,0)
     return sum / this.entries.length
   }
+/* === Goal ====================================== */
+  //setting goal during initialization from storage
+  public setGoal (g:Goal){  
+    this.goal=g;
+  }
+  //adding a new goal
+  public addGoal (myGoal:Goal){
+    this.goal=myGoal;
+    this.storage.set("goal", this.goal);
+  }
+
+  public getGoal(){
+    return this.goal;
+  }
+
+ 
 
 }
