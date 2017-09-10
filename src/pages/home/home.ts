@@ -25,13 +25,18 @@ export class HomePage {
     public navCtrl: NavController,
     public model: Model, 
     private storage: Storage) {
-    this.latestEntry = this.model.getLatestEntry();
-    this.averageWeight = this.model.getAverageWeight();
-    this.storage.get('goal').then((goal) => {
-      console.log("goal read from storage II...")
-      model.setGoal(goal)
+    storage.get('goal').then((goal) => {
+      model.initGoalFromStorage(goal);
       this.currentGoal = goal;
-    }) 
+    })
+    storage.get('entries').then((entries) => {
+      model.initEntriesFromStorage(entries);
+      this.latestEntry = this.model.getLatestEntry();
+      this.averageWeight = this.model.getAverageWeight();
+    });
+    storage.get('range').then((range) => {
+        model.initRangeFromStorage(range);
+    }); 
   }
 
   openAddPage() {

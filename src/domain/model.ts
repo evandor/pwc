@@ -46,7 +46,6 @@ export class Model {
     if (this.entries == null) {
       this.entries = [];
     }
-    console.log("currentEntries: ", this.entries)
   }
 
   public getEntries() {
