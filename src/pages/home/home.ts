@@ -59,6 +59,10 @@ export class HomePage {
     return this.currentGoal == null;
   }
 
+  noEntry() {
+    return this.latestEntry == null;
+  }
+
 
 }
 
