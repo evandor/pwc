@@ -19,12 +19,12 @@ export class HomePage{
 
   private latestEntry: Entry = null;
   private averageWeight = 0;
-  private currentGoal: Goal=null;
+  private currentGoal: Goal = null;
   
 
   constructor(
     public navCtrl: NavController,
-    private model: Model) {
+    public model: Model) {
     this.latestEntry = this.model.getLatestEntry();
     this.averageWeight = this.model.getAverageWeight();
     this.currentGoal = this.model.getGoal();
@@ -44,6 +44,10 @@ export class HomePage{
 
   openRangePage() {
     this.navCtrl.push(RangePage);
+  }
+
+  noSavedGoal() {
+    return this.currentGoal == null;
   }
 
 

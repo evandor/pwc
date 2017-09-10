@@ -10,7 +10,7 @@ import { AddPage } from '../pages/add/add';
 import { EntriesPage } from '../pages/entries/entries';
 import { GoalPage } from '../pages/goal/goal';
 import { RangePage } from '../pages/range/range';
-import { TimestampPipe } from './../pipes/timestamp/timestamp';
+import { TimestampPipe } from '../pipes/timestamp/timestamp';
 import { Model } from '../domain/model'
 import { IonicStorageModule } from '@ionic/storage'
 import { ChartComponent } from '../components/chart/chart'

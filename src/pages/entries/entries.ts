@@ -12,7 +12,7 @@ import { Entry } from '../../domain/entry';
 
 @Component({
   selector: 'page-entries',
-  templateUrl: 'entries.html',
+  templateUrl: 'entries.html'
 })
 export class EntriesPage {
 
@@ -35,12 +35,7 @@ export class EntriesPage {
 
   deleteAllEntries() {
     this.entries = [];
-  }
-
-  editEntries() {
-  }
-
- 
+  } 
 
 }
 

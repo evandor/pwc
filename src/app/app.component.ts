@@ -10,37 +10,36 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage: any = HomePage;
 
   constructor(
-    platform: Platform, 
-    statusBar: StatusBar, 
+    platform: Platform,
+    statusBar: StatusBar,
     splashScreen: SplashScreen,
-    model: Model, 
+    model: Model,
     storage: Storage) {
-      
+
     platform.ready().then(() => {
 
-      
+
 
       console.log("in MyApp constructor...")
       storage.get('entries').then((entries) => {
         console.log("entries read from storage...")
-        model.setEntries(entries);
+        model.initEntriesFromStorage(entries);
         storage.get('range').then((range) => {
           console.log("range read from storage...")
-          model.setRange(range);
-          
+          model.initRangeFromStorage(range);
           storage.get('goal').then((goal) => {
             console.log("goal read from storage...")
-            model.setGoal(goal);
-        
-          statusBar.styleDefault();
-          console.log("hiding splashscreen")
-          splashScreen.hide();
-        });
+            model.initGoalFromStorage(goal);
 
-      });
+            statusBar.styleDefault();
+            console.log("hiding splashscreen")
+            splashScreen.hide();
+          });
+
+        });
 
 
       })

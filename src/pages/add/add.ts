@@ -39,13 +39,10 @@ export class AddPage {
     var entry = new Entry();
     entry.weight = this.addWeightFormGroup.value.weight;
     entry.date = this.addWeightFormGroup.value.date;
-    //entry.time = this.addWeightFormGroup.value.time;
+    entry.time = this.addWeightFormGroup.value.time;
     this.model.addEntry(entry);
     this.navCtrl.push(HomePage);
   }
 
-  cancelEntry(){
-
-  }
 
 }

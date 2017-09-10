@@ -4,8 +4,8 @@
   <ion-navbar>
     <ion-title>Entries</ion-title>
     <ion-buttons end>
-        <button ion-button type="submit" (click)="editEntries()">
-          Edit
+        <button ion-button type="submit" (click)="deleteAllEntries()">
+          Delete
         </button>
       </ion-buttons>
   </ion-navbar>
@@ -21,8 +21,7 @@
             <ion-item>
               {{ entry?.weight }} kg
               <ion-note item-right>
-               <!-- {{ entry?.date|timestampPipe }}-->
-               {{ entry?.date }}
+               {{ entry?.date|timestamp }}
               </ion-note>
             </ion-item>
             <ion-item-options>

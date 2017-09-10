@@ -11,17 +11,14 @@ import { Goal } from '../domain/goal';
 export class Model {
 
   private range = RangeEnum.WEEK;
-  private goal: Goal = null;
+  private goal: Goal = new Goal(null, null);
   private entries: Array<Entry> = [];
 
-  constructor(private storage: Storage) {
-    this.entries.push(new Entry(80,new Date().toISOString()))
-    this.entries.push(new Entry(82,new Date().toISOString()))
-   }
+  constructor(private storage: Storage) {  }
 
   /* === Ranges ====================================== */
 
-  public setRange(r: RangeEnum) {
+  public initRangeFromStorage(r: RangeEnum) {
     this.range = r
     if (this.range == null) {
       this.range = RangeEnum.WEEK
@@ -44,7 +41,7 @@ export class Model {
 
   /* === Entries ====================================== */
 
-  public setEntries(entries: Array<Entry>) {
+  public initEntriesFromStorage(entries: Array<Entry>) {
     this.entries = entries;
     if (this.entries == null) {
       this.entries = [];
@@ -84,24 +81,29 @@ export class Model {
     if (this.entries.length == 0) {
       return 0;
     }
-    var sum = this.entries.map(entry => entry.weight).reduce((a1,a2) => a1+a2,0)
+    var sum = this.entries.map(entry => entry.weight).reduce((a1, a2) => a1 + a2, 0)
     return sum / this.entries.length
   }
-/* === Goal ====================================== */
+  /* === Goal ====================================== */
   //setting goal during initialization from storage
-  public setGoal (g:Goal){  
-    this.goal=g;
+  public initGoalFromStorage(g: Goal) {
+    if (g == null) {
+      this.goal = new Goal(null, null);
+    } else {
+      console.log("da", g)
+      this.goal = g;
+    }
   }
   //adding a new goal
-  public addGoal (myGoal:Goal){
-    this.goal=myGoal;
+  public setGoal(myGoal: Goal) {
+    this.goal = myGoal;
     this.storage.set("goal", this.goal);
   }
 
-  public getGoal(){
+  public getGoal():Goal{
+    console.log("hier")
     return this.goal;
   }
 
- 
 
 }

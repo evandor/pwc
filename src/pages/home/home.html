@@ -60,7 +60,10 @@
     <ion-icon name="locate-outline" item-left color="grey"></ion-icon>
     Goal
     <ion-note item-right>
-        {{ currentGoal?.targetWeight }} kg
+        <div *ngIf="noSavedGoal()">Enter your goal</div>
+        <div *ngIf="!noSavedGoal()">
+        {{ currentGoal.targetWeight }} kg
+        </div>
       </ion-note>
   </button> 
  

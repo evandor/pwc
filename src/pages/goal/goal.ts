@@ -11,7 +11,7 @@ import { HomePage } from '../home/home';
   templateUrl: 'goal.html',
 })
 export class GoalPage {
-
+  goal: Goal;
   addGoalFormGroup: FormGroup;
   @ViewChild('inputGoal') myInput ;
 
@@ -35,10 +35,8 @@ export class GoalPage {
  }
 
   saveGoal(){
-    var goal = new Goal();
-    goal.targetWeight = this.addGoalFormGroup.value.targetWeight;
-    goal.date = this.addGoalFormGroup.value.date;
-    this.model.addGoal(goal);
+    this.goal = new Goal(this.addGoalFormGroup.value.targetWeight, this.addGoalFormGroup.value.date);
+    this.model.setGoal(this.goal);
     this.navCtrl.push(HomePage);
 
   }
