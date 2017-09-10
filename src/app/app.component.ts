@@ -30,14 +30,11 @@ export class MyApp {
         storage.get('range').then((range) => {
           console.log("range read from storage...")
           model.initRangeFromStorage(range);
-          storage.get('goal').then((goal) => {
-            console.log("goal read from storage...")
-            model.initGoalFromStorage(goal);
 
-            statusBar.styleDefault();
-            console.log("hiding splashscreen")
-            splashScreen.hide();
-          });
+          statusBar.styleDefault();
+          console.log("hiding splashscreen")
+          splashScreen.hide();
+
 
         });
 

@@ -1,5 +1,5 @@
 import { NavController } from 'ionic-angular';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Entry } from '../../domain/entry';
 import { AddPage } from '../add/add';
@@ -15,19 +15,23 @@ import { Model } from '../../domain/model';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage{
+export class HomePage {
 
   private latestEntry: Entry = null;
   private averageWeight = 0;
   private currentGoal: Goal = null;
-  
 
   constructor(
     public navCtrl: NavController,
-    public model: Model) {
+    public model: Model, 
+    private storage: Storage) {
     this.latestEntry = this.model.getLatestEntry();
     this.averageWeight = this.model.getAverageWeight();
-    this.currentGoal = this.model.getGoal();
+    this.storage.get('goal').then((goal) => {
+      console.log("goal read from storage II...")
+      model.setGoal(goal)
+      this.currentGoal = goal;
+    }) 
   }
 
   openAddPage() {
