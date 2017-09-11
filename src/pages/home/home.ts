@@ -40,6 +40,7 @@ export class HomePage {
         model.initRangeFromStorage(range);
         this.currentRange=this.model.getRangeAsString();
     }); 
+    this.averageWeight=model.getAverageWeight();
   }
 
   //refreshes data when returning by pop() from another page
@@ -47,6 +48,7 @@ export class HomePage {
     this.currentRange =this.model.getRangeAsString();
     this.currentGoal = this.model.getGoal();
     this.latestEntry = this.model.getLatestEntry();
+    this.averageWeight = this.model.getAverageWeight();
   }
 
   openAddPage() {

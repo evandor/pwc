@@ -13,6 +13,7 @@ export class Model {
   private range = RangeEnum.WEEK;
   private goal: Goal = new Goal(null, null);
   private entries: Array<Entry> = [];
+  
 
   constructor(private storage: Storage) {  }
 
@@ -58,11 +59,9 @@ export class Model {
   }
 
   public addEntry(entry: Entry) {
-    console.log("adding Entry ", entry)
     this.entries.push(entry);
     this.entries.sort((r1, r2) => (r1.date.localeCompare(r2.date)));
     this.storage.set("entries", this.entries);
-    console.log("currentEntries: ", this.entries)
   }
 
   public deleteEntry(entry: Entry) {
@@ -85,8 +84,8 @@ export class Model {
     if (this.entries.length == 0) {
       return 0;
     }
-    var sum = this.entries.map(entry => entry.weight).reduce((a1, a2) => a1 + a2, 0)
-    return sum / this.entries.length
+    var sum = this.entries.map(entry => entry.weight).map(Number).reduce((a1, a2) => a1 + a2, 0);
+    return sum / this.entries.length;
   }
   /* === Goal ====================================== */
   //setting goal during initialization from storage
