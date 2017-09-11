@@ -3,7 +3,6 @@ import { NavController} from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Entry } from '../../domain/entry';
 import { Model } from '../../domain/model';
-import { HomePage } from '../home/home';
 
 
 @Component({
@@ -41,7 +40,7 @@ export class AddPage {
     entry.date = this.addWeightFormGroup.value.date;
     entry.time = this.addWeightFormGroup.value.time;
     this.model.addEntry(entry);
-    this.navCtrl.push(HomePage);
+    this.navCtrl.pop();
   }
 
 

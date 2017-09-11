@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the RangePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { NavController} from 'ionic-angular';
+import { RangeEnum } from '../../domain/rangeEnum';
+import { Model } from '../../domain/model';
 
 @Component({
   selector: 'page-range',
@@ -14,11 +9,31 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class RangePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  availableRanges:any;
+
+  constructor(
+    public navCtrl: NavController, 
+    private model: Model) {
+      this.availableRanges= this.model.getRange();
+      console.log("Available Ranges", this.availableRanges);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RangePage');
+  setRange(r: RangeEnum) {
+    this.model.setRange(r);
+    this.navCtrl.pop();
   }
 
 }
+
+
+
+
+
+
+
+
+  
+
+
+
+

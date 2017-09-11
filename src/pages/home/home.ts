@@ -11,6 +11,7 @@ import { ChartComponent } from '../../components/chart/chart';
 import { Model } from '../../domain/model';
 
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -20,6 +21,7 @@ export class HomePage {
   private latestEntry: Entry = null;
   private averageWeight = 0;
   private currentGoal: Goal = null;
+  private currentRange:String="week";
 
   constructor(
     public navCtrl: NavController,
@@ -36,7 +38,15 @@ export class HomePage {
     });
     storage.get('range').then((range) => {
         model.initRangeFromStorage(range);
+        this.currentRange=this.model.getRangeAsString();
     }); 
+  }
+
+  //refreshes data when returning by pop() from another page
+  ionViewWillEnter(){
+    this.currentRange =this.model.getRangeAsString();
+    this.currentGoal = this.model.getGoal();
+    this.latestEntry = this.model.getLatestEntry();
   }
 
   openAddPage() {

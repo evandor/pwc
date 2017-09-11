@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Model } from '../../domain/model';
 import { Goal } from '../../domain/goal';
-import { HomePage } from '../home/home';
 
 
 @Component({
@@ -37,7 +36,7 @@ export class GoalPage {
   saveGoal(){
     this.goal = new Goal(this.addGoalFormGroup.value.targetWeight, this.addGoalFormGroup.value.date);
     this.model.setGoal(this.goal);
-    this.navCtrl.push(HomePage);
+    this.navCtrl.pop();
 
   }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { RangeEnum } from '../domain/rangeEnum'
-import { Entry } from '../domain/entry'
+import { RangeEnum } from '../domain/rangeEnum';
+import { Entry } from '../domain/entry';
 import { Storage } from '@ionic/storage';
 import { HomePage } from '../pages/home/home';
 import { Goal } from '../domain/goal';
@@ -19,11 +19,16 @@ export class Model {
   /* === Ranges ====================================== */
 
   public initRangeFromStorage(r: RangeEnum) {
-    this.range = r
+    this.range = r;
     if (this.range == null) {
       this.range = RangeEnum.WEEK
     }
+  }
+
+  public setRange(r:RangeEnum){
+    this.range=r;
     this.storage.set("range", this.range);
+
   }
 
   public getRange() {
@@ -89,7 +94,6 @@ export class Model {
     if (g == null) {
       this.goal = new Goal(null, null);
     } else {
-      console.log("da", g)
       this.goal = g;
     }
   }
