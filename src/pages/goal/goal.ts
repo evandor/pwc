@@ -24,6 +24,12 @@ export class GoalPage {
         date: [new Date().toISOString(), Validators.required],
         targetWeight: ['', Validators.required]
       });
+
+      this.addGoalFormGroup.get('targetWeight').setValue(this.model.getGoal().getTargetWeight());
+      if(this.model.getGoal().getTargetDate()!=null){
+        console.log("Das targetDate ist ",this.model.getGoal().getTargetDate());
+      this.addGoalFormGroup.get('date').setValue(this.model.getGoal().getTargetDate());}
+      //if date is null the current date will be set
   }
 
   ionViewLoaded() {
