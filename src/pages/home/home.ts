@@ -1,5 +1,5 @@
 import { NavController } from 'ionic-angular';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit  } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Entry } from '../../domain/entry';
 import { AddPage } from '../add/add';
@@ -27,20 +27,24 @@ export class HomePage {
     public navCtrl: NavController,
     public model: Model, 
     private storage: Storage) {
-    storage.get('goal').then((goal) => {
-      model.initGoalFromStorage(goal);
+  }
+
+  ngOnInit(){
+    console.log("Within ngOnInit on HomePage");
+    this.storage.get('goal').then((goal) => {
+      this.model.initGoalFromStorage(goal);
       this.currentGoal = goal;
     })
-    storage.get('entries').then((entries) => {
-      model.initEntriesFromStorage(entries);
+    this.storage.get('entries').then((entries) => {
+      this.model.initEntriesFromStorage(entries);
       this.latestEntry = this.model.getLatestEntry();
       this.averageWeight = this.model.getAverageWeight();
     });
-    storage.get('range').then((range) => {
-        model.initRangeFromStorage(range);
+    this.storage.get('range').then((range) => {
+        this.model.initRangeFromStorage(range);
         this.currentRange=this.model.getRangeAsString();
     }); 
-    this.averageWeight=model.getAverageWeight();
+    this.averageWeight=this.model.getAverageWeight();
   }
 
   //refreshes data when returning by pop() from another page
@@ -68,7 +72,7 @@ export class HomePage {
   }
 
   noSavedGoal() {
-    return (this.currentGoal == null || this.currentGoal.getTargetWeight()==null);
+    return (this.currentGoal == null); //|| this.currentGoal.getTargetWeight()==null);
   }
 
   noEntry() {
