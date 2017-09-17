@@ -4,6 +4,8 @@ import { Entry } from '../domain/entry';
 import { Storage } from '@ionic/storage';
 import { HomePage } from '../pages/home/home';
 import { Goal } from '../domain/goal';
+import { Events } from 'ionic-angular';
+import { PwcConstants} from '../pwcConstants'
 
 //import * as moment from 'moment';
 
@@ -13,9 +15,9 @@ export class Model {
   private range = RangeEnum.WEEK;
   private goal: Goal = new Goal(null, null);
   private entries: Array<Entry> = [];
-  
 
-  constructor(private storage: Storage) {  }
+
+  constructor(private storage: Storage, private events: Events) { }
 
   /* === Ranges ====================================== */
 
@@ -26,8 +28,8 @@ export class Model {
     }
   }
 
-  public setRange(r:RangeEnum){
-    this.range=r;
+  public setRange(r: RangeEnum) {
+    this.range = r;
     this.storage.set("range", this.range);
 
   }
@@ -48,10 +50,12 @@ export class Model {
   /* === Entries ====================================== */
 
   public initEntriesFromStorage(entries: Array<Entry>) {
+    console.log("reading (init) entries: ", entries)
     this.entries = entries;
     if (this.entries == null) {
       this.entries = [];
     }
+    this.events.publish(PwcConstants.modelEntriesInitializedEvent, Date.now())
   }
 
   public getEntries() {
@@ -87,6 +91,7 @@ export class Model {
     var sum = this.entries.map(entry => entry.weight).map(Number).reduce((a1, a2) => a1 + a2, 0);
     return sum / this.entries.length;
   }
+
   /* === Goal ====================================== */
   //setting goal during initialization from storage
   public initGoalFromStorage(g: Goal) {
@@ -102,8 +107,7 @@ export class Model {
     this.storage.set("goal", this.goal);
   }
 
-  public getGoal():Goal{
-    console.log("hier")
+  public getGoal(): Goal {
     return this.goal;
   }
 

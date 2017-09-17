@@ -17,8 +17,8 @@ export class MyApp {
     splashScreen: SplashScreen) {
 
     platform.ready().then(() => {
-          statusBar.styleDefault();
-          splashScreen.hide();
+      statusBar.styleDefault();
+      splashScreen.hide();
     });
   }
 }

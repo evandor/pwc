@@ -19,10 +19,10 @@ export class EntriesPage {
   private entries: Array<Entry> = [];
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     private model: Model) {
-      this.entries = model.getEntries();
+    this.entries = model.getEntries();
   }
 
   public noSavedEntries() {
@@ -35,7 +35,7 @@ export class EntriesPage {
 
   deleteAllEntries() {
     this.entries = [];
-  } 
+  }
 
 }
 

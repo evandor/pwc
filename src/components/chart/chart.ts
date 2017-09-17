@@ -10,6 +10,9 @@ import { GoalPage } from '../../pages/goal/goal';
 import { EntriesPage } from '../../pages/entries/entries';
 import { RangePage } from '../../pages/range/range';
 import { Model } from '../../domain/model';
+import { Events } from 'ionic-angular';
+import { PwcConstants} from '../../pwcConstants'
+
 import moment from 'moment';
 
 @Component({
@@ -31,32 +34,38 @@ export class ChartComponent implements OnInit {
   private currentRange: String;
   private latestReading: Entry = null;
   private averageWeight = 0;
+  private entries: Array<Entry> = [];
 
   private lineChartData: Array<any> = [
-    { data: new Array(), label: 'IST' },
-    { data: new Array(), label: 'SOLL' }
+    { data: new Array(), label: 'IST' }//,
+    //{ data: new Array(), label: 'SOLL' }
   ];
 
   constructor(public navCtrl: NavController,
     private storage: Storage,
-    private model: Model) {
+    private model: Model,
+    private events: Events) {
 
     this.startDate = moment().add(-7, 'd');
     this.range = "week";
+    this.entries = model.getEntries();
+
+    events.subscribe(PwcConstants.modelEntriesInitializedEvent, (time) => {
+      this.setChartData(this.model.getEntries())
+    });
   }
 
-  ngOnInit() { }
-
-  ionViewWillEnter() {
-    console.log("charts.ts: reading model data...")
+  ngOnInit() { 
     this.setChartData(this.model.getEntries())
-    console.log("charts.ts: ", this.model.getEntries())
-    console.log("onInit charts: " + this.model.getRange());
+  }
+
+  /*ionViewWillEnter() {
+    //this.setChartData(this.model.getEntries())
     this.setRange("year");
     this.currentRange = this.model.getRangeAsString();
     this.latestReading = this.model.getLatestEntry();
     this.averageWeight = this.model.getAverageWeight();
-  }
+  }*/
 
   getData(): Array<any> {
     console.log("Getting data: ", this.lineChartData)
@@ -84,9 +93,9 @@ export class ChartComponent implements OnInit {
     }
   }
 
-  private setChartData(result: Array<Entry>) { //, targetValue: Reading) {
+  private setChartData(result: Array<Entry>) {
     this.lineChartData[0]['data'] = [];
-    this.lineChartData[1]['data'] = [];
+    //this.lineChartData[1]['data'] = [];
     this.lineChartLabels = [];
 
     if (result.length > 0) {
@@ -105,12 +114,15 @@ export class ChartComponent implements OnInit {
       this.lineChartLabels.push(moment(reading.date));
     }
 
+    console.log("calculated minWeight: ", this.minWeight)
+    console.log("calculated maxWeight: ", this.maxWeight)
+    
     var padding = Math.round(0.01 * this.maxWeight);
     this.maxWeight = this.maxWeight + padding;
     this.minWeight = this.minWeight - padding;
 
     if (this.chartDirective.chart != null) {
-      console.log("updating chart")
+      console.log("updating chart...")
       this.chartDirective.chart.update();
     }
   }
