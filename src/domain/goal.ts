@@ -8,13 +8,13 @@ export class Goal {
         this.date = date;
     }
 
-   /* getTargetWeight(){
+    /*getTargetWeight(){
         return this.targetWeight;
-    }
+    }*/
 
-    getTargetDate(){
+    public getTargetDate(){
         return this.date;
-    } */
+    }
 
 
 }

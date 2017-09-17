@@ -72,7 +72,7 @@ export class HomePage {
   }
 
   noSavedGoal() {
-    return (this.currentGoal == null); //|| this.currentGoal.getTargetWeight()==null);
+    return (this.currentGoal == null);// || this.currentGoal.getTargetWeight()==null);
   }
 
   noEntry() {
