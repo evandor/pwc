@@ -59,6 +59,8 @@ export class ChartComponent implements OnInit {
     this.setChartData(this.model.getEntries())
   }
 
+
+
   /*ionViewWillEnter() {
     //this.setChartData(this.model.getEntries())
     this.setRange("year");

@@ -95,11 +95,8 @@ export class Model {
   /* === Goal ====================================== */
   //setting goal during initialization from storage
   public initGoalFromStorage(g: Goal) {
-    if (g == null) {
-      this.goal = new Goal(null, null);
-    } else {
       this.goal = g;
-    }
+    
   }
   //adding a new goal
   public setGoal(myGoal: Goal) {
