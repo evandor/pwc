@@ -3,31 +3,45 @@
 
   <ion-navbar>
     <ion-title>Entries</ion-title>
+    <div *ngIf="editMode() && !noSavedEntries()">
     <ion-buttons end>
-        <button ion-button type="submit" (click)="deleteAllEntries()">
-          Delete
+        <button ion-button type="submit" (click)="editEntries()">
+          Edit
         </button>
       </ion-buttons>
+    </div>
+    <div *ngIf="!editMode() && !noSavedEntries()">
+      <ion-buttons end>
+          <button ion-button type="submit" (click)="deleteAllEntries()">
+            Delete All
+          </button>
+        </ion-buttons>
+      </div>
   </ion-navbar>
 
 </ion-header>
     
     
 <ion-content padding>
-      <div *ngIf="noSavedEntries()">There are no entries yet.</div>
+      <div *ngIf="noSavedEntries()">There are no saved entries.</div>
       <div *ngIf="!noSavedEntries()">
         <ion-list>
-          <ion-item-sliding *ngFor="let entry of entries">
-            <ion-item>
+          <ion-item *ngFor="let entry of entries">
+              
+                <span *ngIf="!editMode()" item-left>
+                  <button ion-button (click)="deleteEntry(entry)" color="danger" clear small >
+                    <ion-icon  name="md-close-circle"></ion-icon>
+                  </button>
+                </span>
+              <span item-left>
               {{ entry?.weight }} kg
+            </span>
               <ion-note item-right>
                {{ entry?.date|timestamp }}
               </ion-note>
-            </ion-item>
-            <ion-item-options>
-              <button ion-button color="danger" (click)="removeItem(entry)"><ion-icon name="trash"></ion-icon></button>
-            </ion-item-options>
-          </ion-item-sliding>
+            
+            
+          </ion-item>
         </ion-list>
       </div>
   </ion-content>

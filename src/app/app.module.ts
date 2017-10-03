@@ -31,7 +31,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     BrowserModule,
     ChartsModule,
     IonicModule.forRoot(MyApp,{
-      backButtonText: 'Cancel',
+      backButtonText: 'Back',
       backButtonIcon: ''
      }),
     IonicStorageModule.forRoot()

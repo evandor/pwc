@@ -3,12 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Model } from '../../domain/model';
 import { Entry } from '../../domain/entry';
 
-/**
- * Generated class for the EntriesPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 
 @Component({
   selector: 'page-entries',
@@ -17,23 +12,39 @@ import { Entry } from '../../domain/entry';
 export class EntriesPage {
 
   private entries: Array<Entry> = [];
+  private mode: String ="edit";
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private model: Model) {
-    this.entries = model.getEntries();
+    
   }
 
-  public noSavedEntries() {
+  ionViewWillEnter(){
+    this.entries = this.model.getEntries();
+    this.mode = "edit";
+  }
+
+  noSavedEntries() {
     return this.entries.length == 0;
   }
 
-  removeEntry(entry: Entry) {
+  editMode(){
+    return this.mode == "edit";
+  }
+
+  editEntries(){
+    this.mode = "delete";
+  }
+
+  deleteEntry(entry: Entry) {
     this.model.deleteEntry(entry);
+    this.entries = this.model.getEntries();
   }
 
   deleteAllEntries() {
+    this.model.deleteAllEntries();
     this.entries = [];
   }
 

@@ -77,6 +77,11 @@ export class Model {
     this.storage.set("entries", this.entries);
   }
 
+  public deleteAllEntries() {
+    this.entries = [];
+    this.storage.set("entries", this.entries);
+  }
+
   public getLatestEntry() {
     if (this.entries.length > 0) {
       return this.entries[this.entries.length - 1]
