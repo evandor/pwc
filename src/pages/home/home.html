@@ -1,17 +1,17 @@
 <ion-header class="page-home" no-border>
-  <ion-navbar hideBackButton="true">
+  <ion-navbar hideBackButton="true" color="mintgreen">
     <ion-title>
       Weight Tracker
     </ion-title>
     <ion-buttons end>
         <button ion-button (click)="openAddPage()">
-          <ion-icon name="add" color="hotpink"></ion-icon>
+          <ion-icon name="add"></ion-icon>
         </button>
       </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content id="contentstyle">
   
   <div class="row">
     <chart style="width:100%;">chart placeholder</chart>
@@ -26,27 +26,27 @@
     </ion-row>
   </div>
   <div *ngIf="!noEntry()">
-  <ion-card id="weightCard">
+  <ion-card>
     <ion-row no-padding>
       <ion-col text-left>
-        <ion-item class="item item-trns">
-          <h1 item-left color="light">Weight</h1>
+        <ion-item >
+          <h1 ion-text item-left color="mintgreen">Current</h1>
         </ion-item>
       </ion-col>
       <ion-col text-right>
-        <ion-item class="item item-trns">
+        <ion-item>
               <h1 item-right color="light">{{ latestEntry?.weight }} kg</h1>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row no-padding>
       <ion-col>
-        <ion-item class="item item-trns">
+        <ion-item>
               <p item-left color="light">Average: {{averageWeight}} kg</p>
         </ion-item>
       </ion-col>
       <ion-col text-right>
-        <ion-item class="item item-trns">
+        <ion-item>
               <p item-right color="light">{{ latestEntry?.date|timestamp }}</p>
         </ion-item>
       </ion-col>
