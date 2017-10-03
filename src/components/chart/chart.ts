@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 import { Entry } from '../../domain/entry';
-import { Observable } from 'rxjs/Rx';
 import { BaseChartDirective } from 'ng2-charts';
 import { AddPage } from '../../pages/add/add';
 import { GoalPage } from '../../pages/goal/goal';
@@ -11,7 +10,7 @@ import { EntriesPage } from '../../pages/entries/entries';
 import { RangePage } from '../../pages/range/range';
 import { Model } from '../../domain/model';
 import { Events } from 'ionic-angular';
-import { PwcConstants} from '../../pwcConstants'
+import { PwcConstants } from '../../pwcConstants'
 
 import moment from 'moment';
 
@@ -27,6 +26,7 @@ export class ChartComponent implements OnInit {
   private lineChartLegend: boolean = false;
   private lineChartType: string = 'line';
   private lineChartLabels: Array<any> = [];
+  public lineChartOptions: any = { responsive: true };
   private startDate;
   private minWeight: number = 70;
   private maxWeight: number = 80;
@@ -37,14 +37,15 @@ export class ChartComponent implements OnInit {
   private entries: Array<Entry> = [];
 
   private lineChartData: Array<any> = [
-    { data: new Array(), label: 'IST' }//,
-    //{ data: new Array(), label: 'SOLL' }
+    { data: new Array(), label: 'IST' }
   ];
 
-  constructor(public navCtrl: NavController,
-    private storage: Storage,
+  constructor(
+    public navCtrl: NavController,
     private model: Model,
     private events: Events) {
+
+    console.log("In Chart.ts, constructor");
 
     this.startDate = moment().add(-7, 'd');
     this.range = "week";
@@ -55,19 +56,18 @@ export class ChartComponent implements OnInit {
     });
   }
 
-  ngOnInit() { 
+  ngOnInit() {
+    console.log("In Chart.ts, ngOnInit");
     this.setChartData(this.model.getEntries())
   }
 
+  ionViewWillEnter() {
+    console.log("In Chart.ts, ionViewWillEnter");
+  }
 
-
-  /*ionViewWillEnter() {
-    //this.setChartData(this.model.getEntries())
-    this.setRange("year");
-    this.currentRange = this.model.getRangeAsString();
-    this.latestReading = this.model.getLatestEntry();
-    this.averageWeight = this.model.getAverageWeight();
-  }*/
+  ionViewDidLoad() {
+    console.log("In Chart.ts, ionViewDidLoad");
+  }
 
   getData(): Array<any> {
     console.log("Getting data: ", this.lineChartData)
@@ -118,10 +118,12 @@ export class ChartComponent implements OnInit {
 
     console.log("calculated minWeight: ", this.minWeight)
     console.log("calculated maxWeight: ", this.maxWeight)
-    
+
     var padding = Math.round(0.01 * this.maxWeight);
     this.maxWeight = this.maxWeight + padding;
     this.minWeight = this.minWeight - padding;
+
+    this.lineChartOptions = this.getLineChartOptions()
 
     if (this.chartDirective.chart != null) {
       console.log("updating chart...")
@@ -129,15 +131,13 @@ export class ChartComponent implements OnInit {
     }
   }
 
-  getLineChartOptions() {
+  public getLineChartOptions(): any {
     return {
       responsive: true,
       scales: {
         yAxes: [{
           ticks: {
-            min: this.minWeight,
-            max: this.maxWeight,
-            stepSize: 2
+            stepSize: 1 + Math.round((this.maxWeight - this.minWeight) / 3)
           }
         }],
         xAxes: [{

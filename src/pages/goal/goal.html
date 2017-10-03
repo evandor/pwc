@@ -2,26 +2,25 @@
   <ion-navbar>
     <ion-title>Goal</ion-title>
     <ion-buttons end>
-        <button ion-button type="submit" [disabled]="!addGoalFormGroup.valid" (click)="saveGoal()">
+      <button ion-button type="submit" [disabled]="!addGoalFormGroup.valid" (click)="saveGoal()">
           Add
         </button>
-      </ion-buttons>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
-  
-  <ion-content padding>
-    <div id="inputBox">
-      <form [formGroup]="addGoalFormGroup" (ngSubmit)="saveGoal()">
-          <ion-item>
-              <ion-note item-left>Date</ion-note>
-              <ion-datetime displayFormat="MMM DD, YYYY" formControlName="date"></ion-datetime>
-            </ion-item>
-        <ion-item>
-          <ion-note item-left>Goal (kg)</ion-note>
-          <ion-input #inputGoal type="number"  formControlName="targetWeight" placeholder="Set goal" autofocus></ion-input>
-        </ion-item>
-      </form>
-    </div>
-  </ion-content>
-  
+
+<ion-content padding>
+  <div id="inputBox">
+    <form [formGroup]="addGoalFormGroup" (ngSubmit)="saveGoal()">
+      <ion-item>
+        <ion-note item-left>Date</ion-note>
+        <ion-datetime displayFormat="MMM DD, YYYY" formControlName="date"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-note item-left>Goal (kg)</ion-note>
+        <ion-input #inputGoal type="number" formControlName="targetWeight" placeholder="Set goal" autofocus></ion-input>
+      </ion-item>
+    </form>
+  </div>
+</ion-content>

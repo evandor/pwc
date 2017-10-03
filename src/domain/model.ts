@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 import { HomePage } from '../pages/home/home';
 import { Goal } from '../domain/goal';
 import { Events } from 'ionic-angular';
-import { PwcConstants} from '../pwcConstants'
+import { PwcConstants } from '../pwcConstants'
 
 //import * as moment from 'moment';
 
@@ -66,6 +66,7 @@ export class Model {
     this.entries.push(entry);
     this.entries.sort((r1, r2) => (r1.date.localeCompare(r2.date)));
     this.storage.set("entries", this.entries);
+    this.events.publish(PwcConstants.modelEntriesInitializedEvent, Date.now())
   }
 
   public deleteEntry(entry: Entry) {
@@ -75,11 +76,13 @@ export class Model {
       }
     }
     this.storage.set("entries", this.entries);
+    this.events.publish(PwcConstants.modelEntriesInitializedEvent, Date.now())
   }
 
   public deleteAllEntries() {
     this.entries = [];
     this.storage.set("entries", this.entries);
+    this.events.publish(PwcConstants.modelEntriesInitializedEvent, Date.now())
   }
 
   public getLatestEntry() {
@@ -100,8 +103,9 @@ export class Model {
   /* === Goal ====================================== */
   //setting goal during initialization from storage
   public initGoalFromStorage(g: Goal) {
-      this.goal = g;
-    
+    console.log ("setting goal from storage: ", g)
+    this.goal = g;
+
   }
   //adding a new goal
   public setGoal(myGoal: Goal) {

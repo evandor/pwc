@@ -4,14 +4,16 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Model } from '../../domain/model';
 import { Goal } from '../../domain/goal';
 
-
 @Component({
   selector: 'page-goal',
   templateUrl: 'goal.html',
 })
 export class GoalPage {
+
   goal: Goal;
+
   addGoalFormGroup: FormGroup;
+
   @ViewChild('inputGoal') myInput;
 
   constructor(

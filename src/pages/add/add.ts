@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController} from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Entry } from '../../domain/entry';
 import { Model } from '../../domain/model';
@@ -13,26 +13,26 @@ export class AddPage {
 
   addWeightFormGroup: FormGroup;
 
-  @ViewChild('inputEntry') myInput ;
+  @ViewChild('inputEntry') myInput;
 
   constructor(
-    private navCtrl: NavController, 
+    private navCtrl: NavController,
     private formBuilder: FormBuilder,
     private model: Model) {
 
-      this.addWeightFormGroup = this.formBuilder.group({
-        date: [new Date().toISOString(), Validators.required],
-        time: [new Date().toISOString(), Validators.required],
-        weight: ['', Validators.required]
-      });
+    this.addWeightFormGroup = this.formBuilder.group({
+      date: [new Date().toISOString(), Validators.required],
+      time: [new Date().toISOString(), Validators.required],
+      weight: ['', Validators.required]
+    });
   }
 
   ionViewLoaded() {
-        setTimeout(() => {
-          this.myInput.setFocus();
-        },150);
-    
-     }
+    setTimeout(() => {
+      this.myInput.setFocus();
+    }, 150);
+
+  }
 
   saveWeight() {
     var entry = new Entry();
