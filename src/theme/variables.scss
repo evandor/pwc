@@ -40,10 +40,11 @@ $colors: (
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
-  hotpink:    #FF6699,
+  hotred:    #F24E5D,
   mintgreen:#84caca,
   lightmintgreen: #a6dbd1,
-  grey: #d3d3d3
+  grey: #d3d3d3,
+  bggrey: #f8f8f8
 );
 
 
@@ -76,6 +77,8 @@ $colors: (
 // default are overridden.
 
 @import "ionic.theme.default";
+$toolbar-background: color($colors, hotred);
+$item-ios-detail-push-color: color($colors, hotred);
 
 
 // Ionicons

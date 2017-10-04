@@ -165,8 +165,8 @@ export class ChartComponent implements OnInit {
   public lineChartColors: Array<any> = [
     {
       //backgroundColor: 'rgba(255, 102, 153,0.2)',
-      borderColor: 'rgba(132,202,202,1)',
-      borderWidth: 5,
+      borderColor: 'rgba(242,78,93,1)',
+      borderWidth: 3,
       pointBackgroundColor: 'rgba(148,159,177,1)',
       pointBorderColor: '#999',
       pointHoverBackgroundColor: '#fff',

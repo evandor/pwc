@@ -1,12 +1,12 @@
 
-<ion-header>
+<ion-header no-border>
 
   <ion-navbar>
     <ion-title>Entries</ion-title>
     <div *ngIf="editMode() && !noSavedEntries()">
     <ion-buttons end>
         <button ion-button type="submit" (click)="editEntries()">
-          Edit
+            <ion-icon name="ios-create-outline" color="white"></ion-icon>
         </button>
       </ion-buttons>
     </div>
@@ -29,7 +29,7 @@
           <ion-item *ngFor="let entry of entries">
               
                 <span *ngIf="!editMode()" item-left>
-                  <button ion-button (click)="deleteEntry(entry)" color="danger" clear small >
+                  <button ion-button (click)="deleteEntry(entry)" color="hotred" clear small >
                     <ion-icon  name="md-close-circle"></ion-icon>
                   </button>
                 </span>

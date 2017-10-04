@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header no-border>
   <ion-navbar>
     <ion-title>
        Range
@@ -11,15 +11,15 @@
   <ion-list radio-group inset [(ngModel)]="availableRanges">
     <ion-item>
       <ion-label>Last 7 days</ion-label>
-      <ion-radio value="0" (ionSelect)="setRange(0)" color="hotpink"></ion-radio>
+      <ion-radio value="0" (ionSelect)="setRange(0)" color="hotred"></ion-radio>
     </ion-item>
     <ion-item>
       <ion-label>Last 30 days</ion-label>
-      <ion-radio value="1" (ionSelect)="setRange(1)" color="hotpink"></ion-radio>
+      <ion-radio value="1" (ionSelect)="setRange(1)" color="hotred"></ion-radio>
     </ion-item>
     <ion-item>
       <ion-label>Last 365 days</ion-label>
-      <ion-radio value="2" (ionSelect)="setRange(2)" color="hotpink"></ion-radio>
+      <ion-radio value="2" (ionSelect)="setRange(2)" color="hotred"></ion-radio>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -1,73 +1,76 @@
 <ion-header class="page-home" no-border>
-  <ion-navbar hideBackButton="true" color="mintgreen">
-    <ion-title>
-      Weight Tracker
-    </ion-title>
-    <ion-buttons end>
-        <button ion-button (click)="openAddPage()">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-buttons>
+  <ion-navbar hideBackButton="true">
+      <div *ngIf="!noEntry()">
+    <ion-title >
+        Weight Tracker
+    </ion-title>  
+      </div>
   </ion-navbar>
 </ion-header>
 
 <ion-content id="contentstyle">
-  
-  <ion-row>
-    <chart style="width:100%;">chart placeholder</chart>
-  </ion-row>
   <div *ngIf="noEntry()">
-    <ion-row>
-      <ion-col style="text-align:center">
-      <button ion-button (click)="openAddPage()" color="mintgreen" large icon-left>
-          <ion-icon name="add"></ion-icon> Add Weight
-      </button>
-    </ion-col>
-    </ion-row>
+    <div class="card-background-page">
+    <ion-card>
+        <img src="assets/img/girl.png"/>
+        <div class="card-title">Weight Tracker</div>
+        <div class="card-subtitle">powered by pline</div>
+    </ion-card>
+  </div>
   </div>
   <div *ngIf="!noEntry()">
-  <ion-card>
-    <ion-row no-padding>
-      <ion-col text-left>
-        <ion-item >
-          <h1 ion-text item-left color="mintgreen">Current</h1>
-        </ion-item>
-      </ion-col>
-      <ion-col text-right>
+      <ion-card>          
+          <ion-row>
+              <chart style="width:100%;">chart placeholder</chart>
+            </ion-row>
+           
         <ion-item>
-              <h1 item-right color="light">{{ latestEntry?.weight }} kg</h1>
+          <ion-icon name="timer-outline" item-start large color="grey"></ion-icon>
+          <h2>Current Weight:</h2>
+          <h2 item-right ion-text style="font-size: 20px" color="hotred">{{ latestEntry?.weight }} kg</h2>
+          <p>1 day ago</p>
         </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row no-padding>
-      <ion-col>
+      
         <ion-item>
-              <p item-left color="light">Average: {{averageWeight}} kg</p>
+          <ion-icon name="locate-outline" item-left large color="grey"></ion-icon>
+          <h2>Still To Go:</h2>
+          <h2 item-right ion-text style="font-size: 20px" color="hotred">6 kg</h2>
+          <p>20 days left</p>
         </ion-item>
-      </ion-col>
-      <ion-col text-right>
-        <ion-item>
-              <p item-right color="light">{{ latestEntry?.date|timestamp }}</p>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+
+     
+     <!-- <ion-row>
+          <ion-col>
+              <ion-item>
+                  <p item-left color="light">Average: {{averageWeight}} kg</p>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <p item-left color="light">Lowest: {{averageWeight}} kg</p>
+            </ion-item>
+          </ion-col>
+          <ion-col center text-center>
+              <ion-item>
+                  <p item-left color="light">Highest: {{averageWeight}} kg</p>
+            </ion-item>
+          </ion-col>
+      </ion-row>-->
+    
   </ion-card>
 </div>
 
   <ion-list inset>
-  <button ion-item (click)="openEntriesPage()">
-    <ion-icon name="create-outline" item-left color="grey"></ion-icon>
+  <button ion-item (click)="openEntriesPage()" color="bggrey">
     Entries
   </button> 
-  <button ion-item (click)="openRangePage()">
-    <ion-icon name="timer-outline" item-left color="grey"></ion-icon>
+  <button ion-item (click)="openRangePage()" color="bggrey">
     Range
      <ion-note item-right>
       {{currentRange}}
       </ion-note>
   </button>
-  <button ion-item (click)="openGoalPage()">
-    <ion-icon name="locate-outline" item-left color="grey"></ion-icon>
+  <button ion-item (click)="openGoalPage()" color="bggrey">
     Goal
     <ion-note item-right>
         <div *ngIf="noSavedGoal()">Set goal</div>
@@ -78,4 +81,14 @@
   </button> 
  
 </ion-list>
+<div text-center>
+<button ion-button color="hotred" outline (click)="openAddPage()" icon-start>
+    <ion-icon name="add"></ion-icon>
+    Add Weight
+</button>
+</div>
 </ion-content>
+
+
+
+
