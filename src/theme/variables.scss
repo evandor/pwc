@@ -40,11 +40,10 @@ $colors: (
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
-  hotred:    #F24E5D,
-  mintgreen:#84caca,
-  lightmintgreen: #a6dbd1,
   grey: #d3d3d3,
-  bggrey: #f8f8f8
+  bggrey: #f8f8f8,
+  freezebase: #66cdcc,
+  freezebasedark: #336799
 );
 
 
@@ -77,8 +76,11 @@ $colors: (
 // default are overridden.
 
 @import "ionic.theme.default";
-$toolbar-background: color($colors, hotred);
-$item-ios-detail-push-color: color($colors, hotred);
+//$toolbar-background: transparent;
+//$toolbar-background: color($colors, freezebase);
+
+$item-ios-detail-push-color: color($colors, freezebasedark);
+
 
 
 // Ionicons

@@ -38,14 +38,14 @@ export class Model {
     return this.range;
   }
 
-  getRangeAsString() {
+  /*getRangeAsString() {
     switch (this.range) {
-      case 0: { return "Last 7 days"; }
-      case 1: { return "Last 30 days"; }
-      case 2: { return "Last 365 days"; }
+      case 0: { return "week"; }
+      case 1: { return "month"; }
+      case 2: { return "year"; }
       default: { return "Unknown"; }
     }
-  }
+  }*/
 
   /* === Entries ====================================== */
 

@@ -1,45 +1,73 @@
 <ion-header class="page-home" no-border>
   <ion-navbar hideBackButton="true">
-      <div *ngIf="!noEntry()">
-    <ion-title >
-        Weight Tracker
-    </ion-title>  
-      </div>
+    <div *ngIf="!noEntry()">
+      <ion-buttons>
+        <button ion-button menuToggle icon-only>
+          <ion-icon name='menu'></ion-icon>
+        </button>
+      </ion-buttons>
+    </div>
+    <ion-title>
+      Weight Tracker
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content id="contentstyle">
-  <div *ngIf="noEntry()">
-    <div class="card-background-page">
-    <ion-card>
-        <img src="assets/img/girl.png"/>
-        <div class="card-title">Weight Tracker</div>
-        <div class="card-subtitle">powered by pline.one</div>
-    </ion-card>
-  </div>
-  </div>
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="openEntriesPage()">
+          Entries
+        </button>
+      <button ion-item (click)="openSettingsPage()">
+          Settings
+        </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+
+<ion-content #content>
   <div *ngIf="!noEntry()">
-      <ion-card>          
-          <ion-row>
-              <chart style="width:100%;">chart placeholder</chart>
-            </ion-row>
-           
+    <ion-card>
+      <ion-row padding-horizontal padding-top>
+        <ion-segment [(ngModel)]="currentRange" color="freezebasedark">
+          <ion-segment-button value="0">
+            7 days
+          </ion-segment-button>
+          <ion-segment-button value="1">
+            30 days
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            365 days
+          </ion-segment-button>
+        </ion-segment>
+      </ion-row>
+      <ion-row>
+        <chart style="width:100%;">chart placeholder</chart>
+      </ion-row>
+      <div *ngIf="!noWeightEntry()">
         <ion-item>
-          <ion-icon name="timer-outline" item-start large color="grey"></ion-icon>
+          <ion-icon name="timer-outline" item-left large color="grey"></ion-icon>
           <h2>Current Weight:</h2>
-          <h2 item-right ion-text style="font-size: 20px" color="hotred">{{ latestEntry?.weight }} kg</h2>
-          <p>1 day ago</p>
+          <h2 item-right ion-text style="font-size: 20px" color="freezebasedark">{{ latestEntry?.weight }} kg</h2>
+          <p>{{ latestEntry?.date }}</p>
         </ion-item>
-      
+      </div>
+      <div *ngIf="!noGoalEntry()">
         <ion-item>
           <ion-icon name="locate-outline" item-left large color="grey"></ion-icon>
-          <h2>Still To Go:</h2>
-          <h2 item-right ion-text style="font-size: 20px" color="hotred">6 kg</h2>
-          <p>20 days left</p>
+          <h2>Target Weight:</h2>
+          <h2 item-right ion-text style="font-size: 20px" color="freezebasedark">{{currentGoal?.targetWeight}} kg</h2>
+          <p>{{currentGoal?.date}}</p>
         </ion-item>
-
-     
-     <!-- <ion-row>
+      </div>
+      <!--  <ion-row>
           <ion-col>
               <ion-item>
                   <p item-left color="light">Average: {{averageWeight}} kg</p>
@@ -55,40 +83,51 @@
                   <p item-left color="light">Highest: {{averageWeight}} kg</p>
             </ion-item>
           </ion-col>
-      </ion-row>-->
-    
-  </ion-card>
-</div>
+      </ion-row> -->
+    </ion-card>
+  </div>
 
-  <ion-list inset>
-  <button ion-item (click)="openEntriesPage()" color="bggrey">
-    Entries
-  </button> 
-  <button ion-item (click)="openRangePage()" color="bggrey">
-    Range
-     <ion-note item-right>
-      {{currentRange}}
-      </ion-note>
-  </button>
-  <button ion-item (click)="openGoalPage()" color="bggrey">
-    Goal
-    <ion-note item-right>
-        <div *ngIf="noSavedGoal()">Set goal</div>
-        <div *ngIf="!noSavedGoal()">
-        {{ currentGoal.targetWeight }} kg
-        </div>
-      </ion-note>
-  </button> 
  
-</ion-list>
-<div text-center>
-<button ion-button color="hotred" outline (click)="openAddPage()" icon-start>
-    <ion-icon name="add"></ion-icon>
-    Add Weight
-</button>
-</div>
+  <div *ngIf="noEntry()">
+    <div style="height: 30%; border:1px solid red;"></div>
+    <ion-list>
+      <ion-item class="item item-trns text-center" no-lines>
+        <ion-thumbnail item-start>
+          <img src="assets/img/kilo.png">
+        </ion-thumbnail>
+        <h2>Track Your Weight</h2>
+        <h3>Write down your measurements</h3>
+      </ion-item>
+      <ion-item class="item item-trns text-center" no-lines>
+        <ion-thumbnail item-start>
+          <img src="assets/img/cup.png">
+        </ion-thumbnail>
+        <h2>Achieve Your Goals</h2>
+        <h3>Monitor your weight loss progress</h3>
+      </ion-item>
+      <ion-item class="item item-trns text-center" no-lines>
+        <ion-thumbnail item-start>
+          <img src="assets/img/private.png">
+        </ion-thumbnail>
+        <h2>Protect Your Privacy</h2>
+        <h3>Your data remains on your phone</h3>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-row>
+    <ion-col>
+      <div text-center>
+        <button class="button-freeze" ion-button color="light" round (click)="openAddPage()">Add Weight</button>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <div text-center>
+        <button class="button-freeze" ion-button color="light" round outline (click)="openGoalPage()">Add Goal</button>
+      </div>
+    </ion-col>
+  </ion-row>
+
 </ion-content>
-
-
-
-

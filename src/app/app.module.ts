@@ -10,6 +10,9 @@ import { AddPage } from '../pages/add/add';
 import { EntriesPage } from '../pages/entries/entries';
 import { GoalPage } from '../pages/goal/goal';
 import { RangePage } from '../pages/range/range';
+import { SettingsPage } from '../pages/settings/settings';
+import { AboutPage } from '../pages/about/about';
+import { IntroPage } from '../pages/intro/intro';
 import { TimestampPipe } from '../pipes/timestamp/timestamp';
 import { Model } from '../domain/model'
 import { IonicStorageModule } from '@ionic/storage'
@@ -24,6 +27,9 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     EntriesPage,
     GoalPage,
     RangePage,
+    SettingsPage,
+    AboutPage,
+    IntroPage,
     TimestampPipe,
     ChartComponent
   ],
@@ -44,7 +50,10 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     AddPage,
     EntriesPage,
     GoalPage,
-    RangePage
+    RangePage,
+    SettingsPage,
+    AboutPage,
+    IntroPage
   ],
   providers: [
     StatusBar,
