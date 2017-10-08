@@ -14,6 +14,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { AboutPage } from '../pages/about/about';
 import { IntroPage } from '../pages/intro/intro';
 import { TimestampPipe } from '../pipes/timestamp/timestamp';
+import { TimeAgoPipe } from '../pipes/time-ago/time-ago';
 import { Model } from '../domain/model'
 import { IonicStorageModule } from '@ionic/storage'
 import { ChartComponent } from '../components/chart/chart'
@@ -31,6 +32,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     AboutPage,
     IntroPage,
     TimestampPipe,
+    TimeAgoPipe,
     ChartComponent
   ],
   imports: [

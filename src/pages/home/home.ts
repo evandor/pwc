@@ -6,13 +6,14 @@ import { AddPage } from '../add/add';
 import { GoalPage } from '../goal/goal';
 import { Goal } from '../../domain/goal';
 import { EntriesPage } from '../entries/entries';
-import { RangePage } from '../range/range';
 import { SettingsPage } from '../settings/settings';
 import { Model } from '../../domain/model';
+
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
+  
 })
 export class HomePage {
 
@@ -66,10 +67,6 @@ export class HomePage {
 
   openGoalPage() {
     this.navCtrl.push(GoalPage);
-  }
-
-  openRangePage() {
-    this.navCtrl.push(RangePage);
   }
 
   openSettingsPage(){
