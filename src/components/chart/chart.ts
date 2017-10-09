@@ -7,7 +7,6 @@ import { BaseChartDirective } from 'ng2-charts';
 import { AddPage } from '../../pages/add/add';
 import { GoalPage } from '../../pages/goal/goal';
 import { EntriesPage } from '../../pages/entries/entries';
-import { RangePage } from '../../pages/range/range';
 import { Model } from '../../domain/model';
 import { Events } from 'ionic-angular';
 import { PwcConstants } from '../../pwcConstants'
@@ -186,10 +185,7 @@ export class ChartComponent implements OnInit {
     this.navCtrl.push(GoalPage);
   }
 
-  openRangePage() {
-    this.navCtrl.push(RangePage);
-  }
-
+ 
   setRange(range: string) {
     this.setStartDate(range);
   }

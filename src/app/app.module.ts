@@ -9,10 +9,8 @@ import { HomePage } from '../pages/home/home';
 import { AddPage } from '../pages/add/add';
 import { EntriesPage } from '../pages/entries/entries';
 import { GoalPage } from '../pages/goal/goal';
-import { RangePage } from '../pages/range/range';
 import { SettingsPage } from '../pages/settings/settings';
 import { AboutPage } from '../pages/about/about';
-import { IntroPage } from '../pages/intro/intro';
 import { TimestampPipe } from '../pipes/timestamp/timestamp';
 import { TimeAgoPipe } from '../pipes/time-ago/time-ago';
 import { Model } from '../domain/model'
@@ -27,10 +25,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     AddPage,
     EntriesPage,
     GoalPage,
-    RangePage,
     SettingsPage,
     AboutPage,
-    IntroPage,
     TimestampPipe,
     TimeAgoPipe,
     ChartComponent
@@ -52,10 +48,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     AddPage,
     EntriesPage,
     GoalPage,
-    RangePage,
     SettingsPage,
-    AboutPage,
-    IntroPage
+    AboutPage
   ],
   providers: [
     StatusBar,
