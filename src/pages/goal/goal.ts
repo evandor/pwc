@@ -16,6 +16,11 @@ export class GoalPage {
 
   @ViewChild('inputGoal') myInput;
 
+  today: any;
+
+  
+  
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -26,6 +31,9 @@ export class GoalPage {
       date: [new Date().toISOString(), Validators.required],
       targetWeight: ['', Validators.required]
     });
+
+    this.today = new Date().toJSON().split('T')[0];
+   
 
     /*this.addGoalFormGroup.get('targetWeight').setValue(this.model.getGoal().getTargetWeight());
     if (this.model.getGoal() != null && this.model.getGoal().getTargetDate() != null) {

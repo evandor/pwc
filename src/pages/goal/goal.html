@@ -15,7 +15,7 @@
     <form [formGroup]="addGoalFormGroup" (ngSubmit)="saveGoal()">
       <ion-item>
         <ion-note item-left>Date</ion-note>
-        <ion-datetime displayFormat="MMM DD, YYYY" formControlName="date"></ion-datetime>
+        <ion-datetime displayFormat="MMM DD, YYYY" formControlName="date" min="{{today}}" max="2027"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-note item-left>Goal (kg)</ion-note>

@@ -12,6 +12,7 @@ import { Model } from '../../domain/model';
 export class AddPage {
 
   addWeightFormGroup: FormGroup;
+  today:any;
 
   @ViewChild('inputEntry') myInput;
 
@@ -25,6 +26,8 @@ export class AddPage {
       time: [new Date().toISOString(), Validators.required],
       weight: ['', Validators.required]
     });
+
+    this.today = new Date().toJSON().split('T')[0];
   }
 
   ionViewLoaded() {
