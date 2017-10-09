@@ -15,8 +15,160 @@
 
 <ion-content padding>
 
-  <h1>Contact</h1>
-  <h1>Privacy Policy</h1>
-  <h1>Terms of Use</h1>
+  <ion-card>
+    <ion-card-header>
+      Contact
+    </ion-card-header>
+    <ion-card-content>
+      <b>Support</b><br> Email: <a href="mailto:app@pline.one?subject=Request/Feedback for Weight Tracker App">app@pline.one</a><br>      Phone: <a href="tel:+498962245537">+49 (0)89 622 455 37</a><br><br>
+
+
+      <b>We make Weight Tracker</b><br> Mira and Carsten Gräf<br> Eggartstr. 7<br> 83365 Nußdorf<br> Germany
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-item>
+      <h2>Terms of Use</h2>
+      <ion-note>Last updated: 01.10.2017</ion-note>
+      <button item-end ion-button clear icon-only large (click)="changeTermsFlagValue()">
+          <div *ngIf="!termsClicked()">
+        <ion-icon name="arrow-dropdown-outline" color="freezebasedark"></ion-icon>
+        </div>
+        <div *ngIf="termsClicked()">
+            <ion-icon name="arrow-dropup-outline" color="freezebasedark"></ion-icon>
+            </div>
+      </button>
+    </ion-item>
+    <div *ngIf="termsClicked()">
+      <ion-card-content>
+        <p>By downloading or using the Weight Tracker application ("app"), these terms will automatically apply to you – you
+          should make sure therefore that you read them carefully before using the app. </p><br>
+
+        <p>(1) We are offering you this app for your personal use free of charge, but you should be aware that you’re not allowed
+          to copy or modify the app or any part of the app. You’re not allowed to attempt to extract the source code of the
+          app or make derivative versions.
+        </p><br>
+
+        <p>(2) The Weight Tracker application offers simple weight and goal tracking. It can be installed and operated on iOS
+          and Android smartphones. We do not guarantee that the services provided by the app operate properly without interruption
+          and/or will be immune to illegal access and damages. </p><br>
+
+        <p>(3) We shall not be liable and shall not have to pay, directly or indirectly, any damages, whether direct, indirect,
+          constructive or special, monetary or otherwise, caused to the user or any third party as a result of or due to
+          the use of or reliance on information and/or services appearing in the app and/or any third party's content, including
+          personal injury, death, property or environmental damage, loss of income and/or prevention of profit caused for
+          any reason.</p><br>
+
+        <p>(4) We are committed to ensuring that the app is as useful and efficient as possible. For that reason, we reserve
+          the right to add, remove, or make modifications to the features, structure and appearance of the app at any time.
+          We may also wish to stop providing the app, and may terminate use of it at any time without giving notice of termination
+          to you. Unless we tell you otherwise, upon any termination, (a) the rights and licenses granted to you in these
+          terms will end; (b) you must stop using the app, and (if needed) delete it from your device.</p><br>
+
+        <p>(5) As we stick to the principle of data minimisation we don't save any user accounts (name, email, password) on
+          our servers. The data that you provide (weight and goal data) are stored in the local storage of your mobile device
+          only. We don’t accept liability for any loss of these data for any reason whatsoever (defects, app reinstall etc.).
+          Furthermore it’s your responsibility to keep your phone and access to the app secure. </p><br>
+
+        <p>(6) In using the app, you’re accepting responsibility for any data charges you may be charged by your mobile provider
+          (e.g. if you’re using the app outside of an Wi-Fi area, outside of your home territory without turning off data
+          roaming etc.). If you are not the bill payer for the device on which you’re using the app, please be aware that
+          we assume that you have received permission from the bill payer for using the app.</p><br>
+
+        <p>(7) We reserve the right, at our sole discretion, to modify or replace these Terms at any time. </p><br>
+
+        <p>If you have any questions about these Terms, please contact us.</p><br>
+      </ion-card-content>
+    </div>
+
+   
+    <ion-item>
+        <h2> Data Protection Policy</h2>
+        <ion-note>Last updated: 01.10.2017</ion-note>
+        <button item-end ion-button clear icon-only large (click)="changePrivacyFlagValue()">
+            <div *ngIf="!privacyClicked()">
+          <ion-icon name="arrow-dropdown-outline" color="freezebasedark"></ion-icon>
+          </div>
+          <div *ngIf="privacyClicked()">
+              <ion-icon name="arrow-dropup-outline" color="freezebasedark"></ion-icon>
+              </div>
+        </button>
+      </ion-item>
+      <div *ngIf="privacyClicked()">
+    <ion-card-content>
+
+      <p>This Data Protection Policy informs you about the collection of personal information when using our app. Any data that
+        is suited to identify you personally is deemed personal information. This includes, for instance, your e-mail address
+        and usage behaviour.
+      </p><br>
+
+      <p>(1) Rights to information and withdrawal: You are entitled at any time to request information concerning your personal
+        data that we have stored, its origin, the recipients or the categories of recipients to whom this data is transmitted
+        and the purpose for storing such data. You may withdraw any prior consent given to us to use the data at any time.
+        Any and all requests to information or withdrawals concerning data processing should be directed via e-mail to
+        <a
+          href="mailto:app@pline.one?subject=Request on stored data/withdrawal for Weight Tracker App">app@pline.one</a>
+          or to the address stated in the Contact section.</p><br>
+
+      <p>(2) Data security: We take appropriate technical measures to create data security, particularly to safeguard your personal
+        information when data is transmitted and against third party access. These measures are constantly updated in line
+        with the current state of technology. </p><br>
+
+      <p>(3) When downloading the app, data, in particular user name, e-mail address, the number of your user account, download
+        time and, if applicable, payment information and the individual device number are transmitted to the Google Play
+        Store or iTunes App Store. This data collection is not performed by us, but by the operator of the respective store;
+        we cannot influence this. We process the data made available to us to the extent that this is required to download
+        the app to your device; no further storing of data takes place. We will not use data collected via Apple Health Kit
+        or via other 3rd-party providers (Google Fit, Samsung Health, Fitbit, Garmin, etc.) for marketing and advertisement.</p><br>
+
+      <p>(4) When using the app, we collect the following personal information (besides the data provided by you) in order to
+        allow the app to work: your mobile phone model;</p><br>
+
+      <p>(5) We implement a so-called advertising identifier (IDFA) for devices with the iOS operating system. The IDFA is made
+        available by iOS; it is a unique, but not personalised and not permanent number that identifies a certain end device.
+        Date gathered with the IDFA is not linked to other device information. We use the IDFA in order to send you personalised
+        advertising and to analyse your usage. If you enable the “Limit Ad Tracking” option in the iOS settings under “Privacy”
+        - “Advertising”, we can only perform the following measures: measure your interaction with banners by counting the
+        number of times a banner is shown without being clicked on (“frequency capping”), click rate, unique user assessment
+        and security measures, fight against fraud and debugging. You can delete the IDFA at any time in the device settings
+        (Reset Advertising Identifier) to create a new IDFA that is not linked to previously gathered data. We inform you
+        that you may not be able to use all app functions if you restrict the use of IDFA.</p><br>
+
+      <p>(6) We use Google Analytics, an analysis service of the company Google Inc. (“Google”). The information gathered by
+        Google Analytics is usually transmitted to a Google server in the US and stored there. Google will use this information
+        on our behalf to analyse how you use the app, to compile reports on app activities and to render additional services
+        associated with the use of the app and the internet to us. Our app uses Google Analytics with the extension “_anonymizeIp()”.
+        This means IP addresses are processed in a shortened form to prevent persons being identified. The IP address transmitted
+        from your device within the scope of Google Analytics will not be brought together with other Google data. The use
+        of Google Analytics is subject to the conditions the German data protection authorities have agreed with Google.
+        Third party information: Google Dublin, Google Ireland Ltd., Gordon House, Barrow Street, Dublin 4, Ireland, Fax:
+        +353 (1) 436 1001. Terms of service: http://www.google.com/analytics/terms/gb.html, information on data safeguarding:
+        http://www.google.com/intl/en/analytics/learn/privacy.html, as well as the data protection policy: http://www.google.com/intl/en/policies/privacy/.</p><br>
+
+      <p>(7) Our app uses Google Inc.’s online AdMob advertising service in order to display advertisements that are tailored
+        to meet your preferences. We do not have any influence on the data collected and do not know the full extent of data
+        collection practices. The data is transmitted to the US and analysed there. Such data may be passed on to Google’s
+        contracting partners or to authorities. This website has also activated Google AdMob advertisements by third parties.
+        The aforementioned data may be transmitted to such third parties (a list of such third parties is available at https://support.google.com/adsense/answer/94149?hl=en).
+        You can block the use of AdMob by either not using the app or by deactivating the internet connection of your end
+        device. Additional information on the purpose and scope of data collection and the processing of your data and additional
+        information on your respective rights and setting options to protect your privacy is available at: Google Inc., 1600
+        Amphitheater Parkway, Mountainview, California 94043, USA; data protection policies in advertising: http://www.google.de/intl/en/policies/technologies/ads
+      </p><br>
+      <p>(8) Our app uses Facebook Inc.’s software development kit (SDK) in order to display advertisements that are tailored
+        to meet your preferences. For this purpose, the app transmits pseudo-anonymised data to enable Facebook to analyse
+        the data and customise its advertising services accordingly. The data is transmitted to the US and analysed there.
+        Such data may be passed on to Facebook’s contracting partners or to authorities. Additional information on the purpose
+        and scope of data collection and the processing of your data and additional information on your respective rights
+        and setting options to protect your privacy is available at: Facebook Inc., 1601 S. California Ave., Palo Alto, CA
+        94304, USA; additional information on Facebook SDK is available at https://developers.facebook.com/docs/ios for IOS
+        and at https://developers.facebook.com/docs/android for Android.
+      </p><br>
+
+    </ion-card-content>
+  </div>
+  </ion-card>
 
 </ion-content>

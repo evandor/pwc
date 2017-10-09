@@ -17,6 +17,7 @@ import { Model } from '../domain/model'
 import { IonicStorageModule } from '@ionic/storage'
 import { ChartComponent } from '../components/chart/chart'
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import {AcknowledgementsPage} from '../pages/acknowledgements/acknowledgements';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     AboutPage,
     TimestampPipe,
     TimeAgoPipe,
-    ChartComponent
+    ChartComponent,
+    AcknowledgementsPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     EntriesPage,
     GoalPage,
     SettingsPage,
-    AboutPage
+    AboutPage,
+    AcknowledgementsPage
   ],
   providers: [
     StatusBar,

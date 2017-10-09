@@ -17,11 +17,20 @@ page-home {
     text-align: center;
   }
 
-  .item.item-trns {
-	  border-color: rgba(0, 0, 0, 0);
-	  background-color: rgba(0, 0, 0, 0);
-	  color: white; 
+ // .item.item-trns {
+//	  border-color: rgba(0, 0, 0, 0);
+	//  background-color: rgba(0, 0, 0, 0);
+//	  color: white; 
+//}
+
+.card, .item {
+  background-color: rgba(255,255,255,0.6);
+  
 }
+
+
+//$card-md-background-color: slategray;
+//$card-wp-background-color: slategray;
 
 ion-icon {
   font-size: 30px;

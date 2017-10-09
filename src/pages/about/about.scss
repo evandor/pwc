@@ -1,3 +1,15 @@
 page-about {
 
+    .toolbar-background {
+        background-color: color($colors, freezebasedark, base);
+      }
+
+    ion-card {
+        border-top: 5px solid color($colors, freezebase, base);
+     }
+
+     .content{
+        background-color: color($colors, bggrey, base);
+    }
+
 }
